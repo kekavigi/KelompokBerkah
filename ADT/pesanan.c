@@ -4,7 +4,7 @@ void AddElmtP(Pesanan * T, ElType X){
 	Elmt(*T, Neff(*T)++) = X;
 }
 
-IdxType SearchIdx (Pesanan T, ElType X){
+IdxType SearchIdxP (Pesanan T, ElType X){
 	IdxType i;
 	if (IsEmpty(T))
 		return IdxUndef;
@@ -17,7 +17,7 @@ IdxType SearchIdx (Pesanan T, ElType X){
 void DelElmtP(Pesanan * T, ElType X){
 	IdxType i;
 
-	if (SearchIdx(*T,X) != IdxUndef)
+	if (SearchIdxP(*T,X) != IdxUndef)
 		for (i=SearchIdxP(*T,X); i<NbElmt(*T); i++)
 			Elmt(T,i) = Elmt(T,i+1);
 	Neff(*T)--;
@@ -26,6 +26,7 @@ void DelElmtP(Pesanan * T, ElType X){
 int NbElmtP (Pesanan T){
 	return Neff(T);
 }
+
 void delPesanan(Pesanan *DaftarPesanan,ElType pesanan){
 	//Menghapus pesanan dari daftar pesanan, pesanan pasti ada di daftar pesanan
 		DelElmtP(DaftarPesanan,&pesanan);
