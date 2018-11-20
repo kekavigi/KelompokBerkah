@@ -4,39 +4,43 @@
 #define MATRIKS_H
 
 #include "boolean.h"
+#include "point.h"
+#include "mesinkar.h"
 
 /* Ukuran minimum dan maksimum baris (koordinat X) dan kolom (absis Y)*/
 #define XMin 1
-#define XMax 20
+#define XMax 8
 #define YMin 1
-#define YMax 20
+#define YMax 8
 
 typedef int indeks; /* indeks baris, kolom */
-typedef int ElType; 
+typedef char ElType; 
 typedef struct { 
 	ElType Mem[XMax+1][YMax+1];
     int NXEff; /* banyaknya/ukuran koordinat X yg terdefinisi */
 	int NYEff; /* banyaknya/ukuran absis Y yg terdefinisi */
+	int kode;  /* kode ruangan suatu matriks yg terdefinisi */
 } MATRIKS;
+
 /* NXEff <= 1 dan NYEff <= 1 */
 /* Indeks matriks yang digunakan: [XMin..XMax][YMin..YMax] */
 /* Memori matriks yang dipakai selalu di "ujung kiri bawah" */
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
 /* *** Konstruktor membentuk MATRIKS *** */
-void MakeMATRIKS (int X, int Y, MATRIKS * M); 
-/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran X x Y di "ujung kiri bawah" memori */
-/* I.S. B dan K adalah valid untuk memori matriks yang dibuat */
+
+void MakeMATRIKS (int kode, MATRIKS * M); 
+/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran 8 x 8 di "ujung kiri bawah" memori */
+/* I.S. kode ruangan matriks valid. matriks non-ruangan (jika ada) memiliki kode -999.
 /* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
 
 /* *** Selektor *** */
-#define NXEff(M) (M).NXEff
-#define NYEff(M) (M).NYEff
-#define Elmt(M,i,j) (M).Mem[(i)][(j)]
+#define NXEff(M)  (M).NXEff
+#define NYEff(M)  (M).NYEff
+#define Kode(M)   (M).kode 
+#define Elmt(M,P) (M).Mem[(P.X)][(P.Y)]
 
 /* *** Selektor "DUNIA MATRIKS" *** */
-boolean IsIdxValid (int i, int j);
-/* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
 indeks GetFirstIdxX (MATRIKS M);
@@ -47,8 +51,6 @@ indeks GetLastIdxX (MATRIKS M);
 /* Mengirimkan indeks baris terbesar M */
 indeks GetLastIdxY (MATRIKS M);
 /* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j);
-/* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 
 /* ********** KELOMPOK BACA/TULIS ********** */ 
 void BacaMATRIKS (MATRIKS * M);

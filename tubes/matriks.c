@@ -1,41 +1,42 @@
 #include "matriks.h"
-#include "boolean.h"
-
 #include <stdio.h>
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
 /* *** Konstruktor membentuk MATRIKS *** */
-void MakeMATRIKS (int X, int Y, MATRIKS * M){
-	NXEff(*M) = X;
-	NYEff(*M) = Y;}
+void MakeMATRIKS (int kode, MATRIKS * M){
+	NXEff(*M) = 8;
+	NYEff(*M) = 8;
+	Kode(*M)  = kode;}
 
-boolean IsIdxValid (int i, int j){
-	return ((XMin<=i) && (i<=XMax) && (YMin<=j) && (j<=YMax));}
-
-indeks GFI_X (MATRIKS M){return XMin;}
-indeks GFI_Y (MATRIKS M){return YMin;}
-indeks GLI_X (MATRIKS M){return NXEff(M);}
-indeks GLI_Y (MATRIKS M){return NYEff(M);}
-
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
-	return ((XMin<=i) && (i<=NXEff(M)) && (YMin<=j) && (j<=NYEff(M)));}
+indeks GetFirstIdx_X (MATRIKS M){return XMin;}
+indeks GetFirstIdx_Y (MATRIKS M){return YMin;}
+indeks GetLastIdx_X  (MATRIKS M){return NXEff(M);}
+indeks GetLastIdx_Y  (MATRIKS M){return NYEff(M);}
 
 /* ********** KELOMPOK BACA/TULIS ********** */ 
 void BacaMATRIKS (MATRIKS *M){
-	int x, y;
-	for (x=1; x<=NXEff(*M); x++){
-		for (y=1; y<=NYEff(*M); y++){
-			scanf("%d", &Elmt(*M,x,y));
+	int x,y;
+	START("ruang1.txt");
+
+	for (y=1; y<=8; y++){
+		for (x=1; x<=8; x++){
+			Elmt(*M,MakePOINT(x,y)) = CC;
+			ADV();
 		}
 	}
 }
 
 void TulisMATRIKS (MATRIKS M){
 	int x, y;
-	for (x=1; x<=GLI_X(M); x++){
-		for (y=1; y<=GLI_Y(M); y++){
-			printf("%d ", Elmt(M,x,y));
+	POINT P;
+
+	P = MakePOINT(1,1);
+
+	for (y=1; y<=8; y++){
+		for (x=1; x<=8; x++){
+			printf("%c", Elmt(M,MakePOINT(x,y)));
 		}
 		printf("\n");
 	}
 }
+
