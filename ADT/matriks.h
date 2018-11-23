@@ -53,6 +53,4 @@ void BacaFileMATRIKS (MATRIKS *M, char *namafile);
 
 void TulisMATRIKS (MATRIKS M);
 // akan mencetak matriks M ke layar
-
-
 #endif

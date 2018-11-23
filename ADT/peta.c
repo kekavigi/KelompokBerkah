@@ -1,24 +1,24 @@
 #include "peta.h"
 #include <string.h>
 
+#include <stdio.h>
+
 void MakePETA(PETA *peta, char *namafile, POINT spawn){
 // membentuk sebuah peta ruangan, pokoke lengkap cuk!
 	//urusan nama file
-	char *namafilecharmap;
-	char *namafilevaluemap;
-	strcat(namafilecharmap, namafile);
-	strcat(namafilevaluemap, namafile);
+	char namafilecharmap[50];
+	char namafilevaluemap[50];
+	strcpy(namafilecharmap, namafile);
+	strcpy(namafilevaluemap, namafile);
 	strcat(namafilecharmap, ".txt");
 	strcat(namafilevaluemap, "int.txt");
 
-    MakeMATRIKS(&CharMap(*peta), 8, 8);
-    MakeMATRIKS(&ValueMap(*peta), 8, 8);
-    BacaFileMATRIKS(&CharMap(*peta), namafilecharmap);
+	MakeMATRIKS(&CharMap(*peta), 8, 8);
+	BacaFileMATRIKS(&CharMap(*peta), namafilecharmap);
+  MakeMATRIKS(&ValueMap(*peta), 8, 8);
 	BacaFileMATRIKS(&ValueMap(*peta), namafilevaluemap);
 
-	LokPlayer(*peta) = spawn;
-
-	Elmt(CharMap(*peta), LokPlayer(*peta)) = 'P';
+	Spawn(*peta) = spawn;
 }
 
 POINT FindMeja(MATRIKS M, POINT P){
@@ -79,6 +79,11 @@ void UpdatePosisiPlayer(MATRIKS*M, POINT P){}
 // akan mengubah posisi player ke posisi baru P
 // I.S : P terdefinisi untuk player berpindah
 // F.S : jelas
+
+void TulisPETA(PETA peta){
+		Elmt(CharMap(peta), LokPlayer(peta)) = 'P';
+		TulisMATRIKS(CharMap(peta));
+}
 
 void GantiPeta(MATRIKS *M, int move){}
 // akan mengubah peta yang aktif dimainkan

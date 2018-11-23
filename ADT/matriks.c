@@ -37,7 +37,7 @@ void TulisMATRIKS (MATRIKS M){
 
 	P = MakePOINT(1,1);
 
-	for (y=1; y<=8; y++){
+	for (y=8; y>=1; y--){
 		for (x=1; x<=8; x++){
 			printf("%c", Elmt(M,MakePOINT(x,y)));
 		}

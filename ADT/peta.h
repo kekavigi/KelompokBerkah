@@ -6,7 +6,7 @@
 /* objek non-player di peta */
 #define CharMap(peta) (peta).char_map
 #define ValueMap(peta) (peta).value_map
-#define LokPlayer(peta) (peta).lokplayer
+#define Spawn(peta) (peta).spawn
 
 #define UBIN    '_'
 #define KKOSONG 'C'
@@ -14,9 +14,11 @@
 #define MEJA    'M'
 
 typedef struct {
-	MATRIKS char_map;  /* berisi karakter karakter yang bakal di print */
-    MATRIKS value_map;   /* berisi angka angka yg mungkin diperlukan */
-	POINT lokplayer;      /* lokasi player saat ini */
+	MATRIKS char_map;    /* berisi karakter karakter yang bakal di print */
+  MATRIKS value_map;   /* berisi angka angka yg mungkin diperlukan */
+	POINT spawn;         /* lokasi spawn player di suatu peta */
+	POINT pintu1, pintu2;/* lokasi pintu-pintu di suatu peta */
+	POINT pos  					 /* posisi player saat ini */
 } PETA;
 
 void MakePETA(PETA *peta, char *namafile, POINT spawn);
@@ -47,6 +49,8 @@ void UpdatePosisiPlayer(MATRIKS*M, POINT P);
 // akan mengubah posisi player ke posisi baru P
 // I.S : P terdefinisi untuk player berpindah
 // F.S : jelas
+
+void TulisPETA(PETA peta);
 
 void GantiPeta(MATRIKS *M, int move);
 // akan mengubah peta yang aktif dimainkan
