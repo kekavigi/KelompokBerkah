@@ -11,16 +11,13 @@
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
-typedef int time;
 typedef int jumlah;
-typedef int waiting;
 typedef int kesabaran;
 typedef int addressQ;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-typedef struct { time * T;   
+typedef struct {   
 				 jumlah * J;
-				 waiting * W;
 				 kesabaran * K;
                  addressQ HEAD;  /* alamat penghapusan */
                  addressQ TAIL;  /* alamat penambahan */
@@ -33,13 +30,10 @@ typedef struct { time * T;
 /* Jika Q adalah Queue, maka akses elemen : */
 #define Head(Q) (Q).HEAD
 #define Tail(Q) (Q).TAIL
-#define timeHead(Q) (Q).T[(Q).HEAD]
+
 #define jumlahHead(Q) (Q).J[(Q).HEAD]
-#define waitingHead(Q) (Q).W[(Q).HEAD]
 #define kesabaranHead(Q) (Q).K[(Q).HEAD]
-#define timeTail(Q) (Q).T[(Q).TAIL]
 #define jumlahTail(Q) (Q).J[(Q).TAIL]
-#define waitingTail(Q) (Q).W[(Q).TAIL]
 #define kesabaranTail(Q) (Q).K[(Q).TAIL]
 #define MaxElQ(Q) (Q).MaxElQ
 
@@ -68,11 +62,11 @@ void DealokasiQueue(Queue * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void AddQueue (Queue * Q, time T, jumlah J, waiting W, kesabaran K);
+void AddQueue (Queue * Q, jumlah J, kesabaran K);
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
-void DelQueue (Queue * Q, addressQ * P, time * T,jumlah * J, waiting * W, kesabaran * K);
+void DelQueue (Queue * Q, addressQ * P, jumlah * J, kesabaran * K);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
@@ -86,5 +80,9 @@ void PrintQueue(Queue Q);
 addressQ Search(Queue Q, int jumlah);
 
 Queue DeleteP(Queue Q, addressQ P);
+
+void CopyQueue (Queue Qin, Queue *Qout);
+/*	I.S. Qin terdefinisi, bisa kosong
+	F.S. Qout menghasilkan sama dengan Qin dengan address berbeda	*/
 
 #endif
