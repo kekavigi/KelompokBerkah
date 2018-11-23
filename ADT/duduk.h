@@ -14,9 +14,8 @@
 #define Nil -999
 #define Habis 0
 
-typedef int NoMeja;
-
 typedef struct {
+	int Nomor;
 	int Capacity;
 	int Isi; //ini menyatakan jumlah yang diisi dari meja
 	boolean Available; 	//ini menyatakan apakah meja udah didudukin apa belum
@@ -26,6 +25,7 @@ typedef struct {
 } NoMeja;
 
 /* Jika N adalah NoMeja, maka akses elemen: */
+#define No(N) (N).Nomor
 #define Cap(N) (N).Capacity
 #define Isi(N) (N).Isi
 #define Avail(N) (N).Available
@@ -34,7 +34,6 @@ typedef struct {
 /* Kalo ada yang bernilai Nil, maka belom didefinisiin */
 
 /* Di sini gw definisiin nyawa, nanti diganti setelah liat code Fio */
-int Life;
 
 void SetEmpty ();
 /*	I.S. Sembarang
@@ -62,7 +61,7 @@ void UpdateKesabaranDuduk ();
 /* CekPesanan (); ini gak perlu, soalnya udah ada Pesan(N) */
 
 /* MakeRandomPesanan (); udah tersedia di (PlaceCustAntri) */
-void DelSabarDuduk (NoMeja N, Life *L);
+void DelSabarDuduk (NoMeja N, PLAYER *P);
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
 
 #endif
