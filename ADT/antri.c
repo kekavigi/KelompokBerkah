@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "antri.h"
 #include "player.h"
+#include "jam.h"
 
 void SetEmptyAntri (Queue *Q, int Max)
 //I.S. Sembarang
@@ -13,19 +14,19 @@ void SetEmptyAntri (Queue *Q, int Max)
 	CreateEmptyQueue (Q, Max);
 }
 
-void TambahCust (Queue *Q, time T, jumlah J, waiting W, kesabaran K)
+void TambahCust (Queue *Q, jumlah J, kesabaran K)
 //I.S. Q mungkin kosong, tabel tidak penuh
 //F.S. Masukan di atas jadi tail baru, circular buffer.
 {
-	AddQueue (Q, T, J, W, K);
+	AddQueue (Q, J, K);
 }
 
-void DelCust (PLAYER *P, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K)
+void DelCust (PLAYER *P1, Queue *Q, addressQ *P, jumlah *J, kesabaran *K)
 //I.S. Q tidak kosong
 //F.S. Head dihapus, info dari head dimasukin ke variabel di atas. Nyawa kurang 1.
 {
-	DelQueue (Q, P, T, J, W, K);
-	UPDATE_LIFE (P);
+	DelQueue (Q, P, J, K);
+	UPDATE_LIFE (P1);
 }
 
 boolean CekSabarAntri (Queue Q)
@@ -33,7 +34,7 @@ boolean CekSabarAntri (Queue Q)
 	Kalo ada yang abis keluarannya true */
 {
 	boolean abis = false;
-	int t, j, w, k;
+	int j, k;
 	if (IsEmptyQueue(Q))
 	{
 		return (abis);
@@ -42,7 +43,7 @@ boolean CekSabarAntri (Queue Q)
 	{
 		while (!IsEmptyQueue(Q) && !abis)
 		{
-			DelQueue (&Q, &P, &t, &j, &w, &k);
+			DelQueue (&Q, &P, &j, &k);
 			if (k == 0)
 			{
 				abis = true;
@@ -58,21 +59,21 @@ void UpdateSabarAntri (Queue *Q)
 {
 	Queue QTemp1, QTemp2;
 	CreateEmptyQueue (&QTemp2, MaxElQ(*Q));
-	int T, J, W, K;
+	int J, K;
 	addressQ P;
 	CopyQueue (*Q, &QTemp1);
 	while (!IsEmptyQueue(QTemp1))
 	{
 		kesabaranHead(Q) = kesabaranHead(Q) - 1;
-		DelQueue(&Qin, &P, &T, &J, &W, &K);
-		AddQueue(&QTemp2, T, J, W, K);
+		DelQueue(&Qin, &P, &J, &K);
+		AddQueue(&QTemp2, J, K);
 	}
 	CopyQueue (QTemp2, Q);
 	DealokasiQueue (&QTemp1);
 	DealokasiQueue (&QTemp2);
 }
 
-void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K);
+void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabaran *K);
 //	Ini sama persis kayak DelCust, cuma nyawanya gak ngurang dan ditempatin di meja tertentu. X nomor meja yang dituju
 //	Langsung diisi informasi buat meja yang dipake di duduk.h
 {
@@ -80,12 +81,20 @@ void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, time *T, jumlah *J
 	{
 		Avail(N,X) = false;
 		Isi(N,X) = jumlahHead(*Q);
-		Sabar(N,X) = rand() % (70 + 1 - 50) + 50;
+		Sabar(N,X) = J_DUDUK();
 		Pesan(N,X) = rand() % (8 + 1 - 1) + 1;
-		DelQueue (Q, P, T, J, W, K);
+		DelQueue (Q, P, T, J, K);
 	}
 	else
 	{
 		printf("Meja tidak cukup.\n");
 	}
+}
+
+void GeneratePelanggan (Queue *Q)
+// Buat generate pelanggan
+{
+	J = rand() % (4 + 1 - 1) + 1;
+	K = J_ANTRI();
+	AddQueue (Q,J,K);
 }
