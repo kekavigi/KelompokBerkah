@@ -1,8 +1,11 @@
 #include "peta.h"
 
 POINT FindMeja(MATRIKS M, POINT P){
-// return posisi meja di dekat player P;
-// pasti ada meja, harus ada meja!!!
+// akan mengembalikan posisi meja yang dekat dengan player P
+/* I.S.: player di samping customer
+				jika customer di left player, ada meja di left customer
+				jika customer di down player, ada meja di down customer
+				...*/
 	if      ((!IsVal(UP(P)))   && (Elmt(M,UP(UP(P)))==MEJA))    	return UP(UP(P));
 	else if ((!IsVal(LEFT(P))) && (Elmt(M,LEFT(LEFT(P)))==MEJA))  	return LEFT(LEFT(P));
 	else if ((!IsVal(DOWN(P))) && (Elmt(M,DOWN(DOWN(P)))==MEJA))  	return DOWN(DOWN(P));
@@ -10,7 +13,7 @@ POINT FindMeja(MATRIKS M, POINT P){
 }
 
 int CountObjek(MATRIKS M, POINT P, char objek){
-// return banyaknya objek di sekitar point P;
+// akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right player;
 	int banyak = 0;
 	if ((!IsVal(UP(P)))    && (Elmt(M,UP(P))==objek))	 banyak++;
 	if ((!IsVal(LEFT(P)))  && (Elmt(M,LEFT(P))==objek))  banyak++;
@@ -20,8 +23,8 @@ int CountObjek(MATRIKS M, POINT P, char objek){
 }
 
 void IsiKursiKosong(MATRIKS *M, POINT P, int minta){
-// akan mengisi kursi kosong sebanyak yang diminta
-// (kalau bisa) di meja dekat posisi player P
+// akan mengubah state kursi kosong ke kursi penuh sebanyak minta
+//
 	POINT meja = FindMeja(*M, P);
 
 	int banyakkosong = (CountObjek(*M, meja, 'C'));
