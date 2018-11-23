@@ -15,7 +15,7 @@ void MakePETA(PETA *peta, char *namafile, POINT spawn){
 
 	MakeMATRIKS(&CharMap(*peta), 8, 8);
 	BacaFileMATRIKS(&CharMap(*peta), namafilecharmap);
-  MakeMATRIKS(&ValueMap(*peta), 8, 8);
+	MakeMATRIKS(&ValueMap(*peta), 8, 8);
 	BacaFileMATRIKS(&ValueMap(*peta), namafilevaluemap);
 
 	Spawn(*peta) = spawn;
