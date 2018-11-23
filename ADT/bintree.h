@@ -1,5 +1,3 @@
-/**********************ADT Pohon Biner*******************/
-
 #ifndef _BINTREE_H_
 #define _BINTREE_H_
 
@@ -91,7 +89,7 @@ void PrintPostorder (BinTree P);
 //akar. Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
 void ShowBranch (BinTree P);
 /*Menunjukkan cabang resep yang tersedia */
-void PrintBranch(int h, int * ArrSlash);
+void PrintBranch(int h);
 /* Fungsi Pembantu PrintTree() */
 /* Menunjukkan alur dari semua cabang pohon biner */
 void PrintTree (BinTree P, int dh, int hc, int * ArrSlash);
