@@ -20,14 +20,14 @@
 typedef int indeks; /* indeks baris, kolom */
 typedef struct {
 	int Mem[XMax+1][YMax+1];
-    int NXEff;		/* banyaknya/ukuran koordinat X yg terdefinisi */
+  int NXEff;		/* banyaknya/ukuran koordinat X yg terdefinisi */
 	int NYEff;		/* banyaknya/ukuran absis Y yg terdefinisi */
 } MATRIKS;
 
 /* *** Selektor *** */
 #define NXEff(M)  (M).NXEff
 #define NYEff(M)  (M).NYEff
-#define Elmt(M,P) (M).Mem[(P.X)][(P.Y)]
+#define ElmtMat(M,P) (M).Mem[(P.X)][(P.Y)]
 
 /* *** Selektor "DUNIA MATRIKS" *** */
 

@@ -2,12 +2,13 @@
 #define PETA_H
 
 #include "matriks.h"
+#include "array.h"
+
+#define Mat(peta) (peta).mat
+#define Pos(peta) (peta).pos
+#define StatMeja(peta) (peta).statmej
 
 /* objek non-player di peta */
-#define (peta) (peta).char_map
-#define ValueMap(peta) (peta).value_map
-#define Spawn(peta) (peta).spawn
-
 #define UBIN    '_'
 #define KKOSONG 'C'
 #define KPENUH  'X'
@@ -15,7 +16,8 @@
 
 typedef struct {
 	MATRIKS mat;    /* berisi karakter karakter yang bakal di print */
-	
+	POINT P;					/* posisi player */
+	TabInt statmej;  /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
 } PETA;
 
 void MakePETA(PETA *peta, char *namafile, POINT pos);
@@ -49,7 +51,7 @@ void UpdatePosisiPlayer(MATRIKS*M, POINT P);
 
 void TulisPETA(PETA peta);
 
-void GantiPeta(MATRIKS *M, int move);
+//void GantiPeta(MATRIKS *M, int move);
 // akan mengubah peta yang aktif dimainkan
 // F.S : jika move valid di suatu peta, peta akan berubah menjadi peta yang baru
 

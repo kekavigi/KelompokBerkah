@@ -88,7 +88,7 @@ boolean Search (TabInt T, ElType X);
 /* Search apakah ada elemen tabel T yang bernilai X */
 /* Jika ada, menghasilkan true, jika tidak ada menghasilkan false */
 /* Memakai Skema search DENGAN boolean */
-ElType SearchIdx (TabInt T, ElType X)
+ElType SearchIdx (TabInt T, ElType X);
 /* Search apakah ada elemen tabel T yang bernilai X */
 /* Jika ada, menghasilkan index elemen X, jika tidak ada menghasilkan IdxUndef */
 
@@ -106,7 +106,7 @@ void DelElmt (TabInt * T, ElType * X);
 /* F.S. X adalah nilai elemen terakhir T sebelum penghapusan, */
 /*      Banyaknya elemen tabel berkurang satu */
 /*      Tabel T mungkin menjadi kosong */
-void DelLastElmt (TabInt * T, ElType * X){
+void DelLastElmt (TabInt * T, ElType * X);
 /* Proses : Menghapus sebuah elemen terakhir di tabel */
 /* I.S. Tabel tidak kosong */
 /* F.S. X adalah nilai elemen terakhir T sebelum penghapusan, */
