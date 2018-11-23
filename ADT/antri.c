@@ -3,7 +3,7 @@
 	Wanul                     */
 	
 #include <stdio.h>
-#include "antrian.h"
+#include "antri.h"
 
 void SetEmptyAntri (Queue *Q, int Max)
 //I.S. Sembarang
@@ -19,12 +19,12 @@ void TambahCust (Queue *Q, time T, jumlah J, waiting W, kesabaran K)
 	AddQueue (Q, T, J, W, K);
 }
 
-void DelCust (Life *L, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K)
+void DelCust (PLAYER *P, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K)
 //I.S. Q tidak kosong
 //F.S. Head dihapus, info dari head dimasukin ke variabel di atas. Nyawa kurang 1.
 {
 	DelQueue (Q, P, T, J, W, K);
-	*L = *L - 1;
+	Health(*P) = Health(*P) - 1;
 }
 
 boolean CekSabarAntri (Queue Q)
@@ -55,23 +55,36 @@ void UpdateSabarAntri (Queue *Q)
 /*	Setiap langkah yang player lakukan, bakal ngurangin sabar setiap yang antri */
 // I.S. Asumsi gak ada yang kesabarannya 0
 {
-	//Ini gw bingung algoritmanya, tolong dibantu
+	Queue QTemp1, QTemp2;
+	CreateEmptyQueue (&QTemp2, MaxElQ(*Q));
+	int T, J, W, K;
+	addressQ P;
+	CopyQueue (*Q, &QTemp1);
+	while (!IsEmptyQueue(QTemp1))
+	{
+		kesabaranHead(Q) = kesabaranHead(Q) - 1;
+		DelQueue(&Qin, &P, &T, &J, &W, &K);
+		AddQueue(&QTemp2, T, J, W, K);
+	}
+	CopyQueue (QTemp2, Q);
+	DealokasiQueue (&QTemp1);
+	DealokasiQueue (&QTemp2);
 }
 
-void PlaceCustAntri (NoMeja N, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K)
-//	Ini sama persis kayak DelCust, cuma nyawanya gak ngurang dan ditempatin di meja tertentu
+void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K);
+//	Ini sama persis kayak DelCust, cuma nyawanya gak ngurang dan ditempatin di meja tertentu. X nomor meja yang dituju
 //	Langsung diisi informasi buat meja yang dipake di duduk.h
 {
-	if (Cap(N) >= jumlahHead(*Q))
+	if (Cap(*N,X) >= jumlahHead(*Q))
 	{
-		Avail(N) = false;
-		Isi(N) = jumlahHead(*Q);
-		Sabar(N) = rand() % (70 + 1 - 50) + 50;
-		Pesan(N) = rand() % (8 + 1 - 1) + 1;
+		Avail(N,X) = false;
+		Isi(N,X) = jumlahHead(*Q);
+		Sabar(N,X) = rand() % (70 + 1 - 50) + 50;
+		Pesan(N,X) = rand() % (8 + 1 - 1) + 1;
 		DelQueue (Q, P, T, J, W, K);
 	}
 	else
 	{
-		printf("Meja tidak cukup\n");
+		printf("Meja tidak cukup.\n");
 	}
 }
