@@ -24,7 +24,7 @@ void BacaFileMATRIKS (MATRIKS *M, char *namafile){
 	START(namafile);
 	for (y=1; y<=8; y++){
 		for (x=1; x<=8; x++){
-				Elmt(*M,MakePOINT(x,y)) = CC;
+				ElmtMat(*M,MakePOINT(x,y)) = CC;
 				ADV();
 		}
 	}
@@ -39,7 +39,7 @@ void TulisMATRIKS (MATRIKS M){
 
 	for (y=8; y>=1; y--){
 		for (x=1; x<=8; x++){
-			printf("%c", Elmt(M,MakePOINT(x,y)));
+			printf("%c", ElmtMat(M,MakePOINT(x,y)));
 		}
 		printf("\n");
 	}

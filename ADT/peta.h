@@ -7,7 +7,7 @@
 #define Mat(peta) (peta).mat
 #define Pos(peta) (peta).pos
 #define StatMeja(peta) (peta).statmej
-
+#define Wadah(peta) (peta).wadah
 /* objek non-player di peta */
 #define UBIN    '_'
 #define KKOSONG 'C'
@@ -16,8 +16,9 @@
 
 typedef struct {
 	MATRIKS mat;    /* berisi karakter karakter yang bakal di print */
-	POINT P;					/* posisi player */
+	POINT pos;					/* posisi player */
 	TabInt statmej;  /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
+	TabInt wadah; /* nomor nampan */
 } PETA;
 
 void MakePETA(PETA *peta, char *namafile, POINT pos);

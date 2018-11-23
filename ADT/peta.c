@@ -4,8 +4,8 @@
 
 void MakePETA(PETA *peta, char *namafile, POINT pos){
 	MakeMATRIKS(&Mat(*peta), 8, 8);
-	BacaFileMATRIKS(&Mat(*peta), *namafile);
-	Pos(*peta) = spawn;
+	BacaFileMATRIKS(&Mat(*peta), namafile);
+	Pos(*peta) = pos;
 }
 
 POINT FindMeja(MATRIKS M, POINT P){
@@ -65,7 +65,7 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 
 void TulisPETA(PETA peta){
 		ElmtMat(Mat(peta), Pos(peta)) = 'P';
-		TulisMATRIKS(CharMap(peta));
+		TulisMATRIKS(Mat(peta));
 }
 
 //void GantiPeta(MATRIKS *M, int move){}

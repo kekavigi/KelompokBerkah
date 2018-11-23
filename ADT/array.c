@@ -1,4 +1,5 @@
-#include "stack.h"
+#include "array.h"
+#include "stackt.h"
 #include "boolean.h"
 
 /* ********** KONSTRUKTOR ********** */
@@ -52,7 +53,7 @@ boolean IsFull (TabInt T){
 /* ********** TULIS ISI TABEL ********** */
 void TulisArray (TabInt T){
 	IdxType i;
-	
+
 	printf("[");
 	if (!IsEmpty(T)){
 		for (i=1; i<NbElmt(T); i++)
@@ -103,13 +104,13 @@ void AddElmt (TabInt * T, ElType X){
 /* F.S. X adalah elemen terakhir T yang baru */
 
 /* ********** MENGHAPUS ELEMEN ********** */
-void DelElmt(TabInt * T, ElType X){
+void DelElmt(TabInt * T, ElType *X){
 	IdxType i;
 
-	if (SearchIdx(*T,X) != IdxUndef)
-		for (i=SearchIdx(*T,X); i<NbElmt(*T); i++)
-			Elmt(T,i) = Elmt(T,i+1);
-	Neff(T)--;
+	if (SearchIdx(*T,*X) != IdxUndef)
+		for (i=SearchIdx(*T,*X); i<NbElmt(*T); i++)
+			Elmt(*T,i) = Elmt(*T,i+1);
+	Neff(*T)--;
 }
 /* Proses : Menghapus elemen pertama di tabel dengan ElType X*/
 /* I.S. Tabel tidak kosong */
@@ -117,12 +118,10 @@ void DelElmt(TabInt * T, ElType X){
 /*      Tabel T mungkin menjadi kosong. */
 
 void DelLastElmt (TabInt * T, ElType * X){
-	Elmt(*T, --Neff(*T)) == X;
+	Elmt(*T, --Neff(*T)) == *X;
 }
 /* Proses : Menghapus sebuah elemen terakhir di tabel */
 /* I.S. Tabel tidak kosong */
 /* F.S. X adalah nilai elemen terakhir T sebelum penghapusan, */
 /*      Banyaknya elemen tabel berkurang satu */
 /*      Tabel T mungkin menjadi kosong */
-
-#endif
