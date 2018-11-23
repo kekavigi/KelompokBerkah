@@ -4,10 +4,23 @@
 #include "matriks.h"
 
 /* objek non-player di peta */
+#define CharMap(peta) (peta).char_map
+#define ValueMap(peta) (peta).value_map
+#define LokPlayer(peta) (peta).lokplayer
+
 #define UBIN    '_'
 #define KKOSONG 'C'
 #define KPENUH  'X'
-#define MEJA		'M'
+#define MEJA    'M'
+
+typedef struct {
+	MATRIKS char_map;  /* berisi karakter karakter yang bakal di print */
+    MATRIKS value_map;   /* berisi angka angka yg mungkin diperlukan */
+	POINT lokplayer;      /* lokasi player saat ini */
+} PETA;
+
+void MakePETA(PETA *peta, char *namafile, POINT spawn);
+// membentuk sebuah peta ruangan, pokoke lengkap cuk!
 
 POINT FindMeja(MATRIKS M, POINT P);
 // akan mengembalikan posisi meja yang dekat dengan player P
@@ -35,7 +48,8 @@ void UpdatePosisiPlayer(MATRIKS*M, POINT P);
 // I.S : P terdefinisi untuk player berpindah
 // F.S : jelas
 
-void GantiPeta(*M, int move);
-// akan mengubah peta yang aktif
+void GantiPeta(MATRIKS *M, int move);
+// akan mengubah peta yang aktif dimainkan
+// F.S : jika move valid di suatu peta, peta akan berubah menjadi peta yang baru
 
 #endif

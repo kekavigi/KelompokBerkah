@@ -3,21 +3,11 @@
 #include <stdlib.h>
 
 int main(){
-	MATRIKS r1, r2, r3, r4;
+	PETA Ruang1;
 
-	MakeMATRIKS(1,&r1);
-	MakeMATRIKS(2,&r2);
-	MakeMATRIKS(3,&r3);
-	MakeMATRIKS(4,&r4);
+	MakePETA(&Ruang1, "ruang1", MakePOINT(4,4));
+	TulisMATRIKS(CharMap(Ruang1));
 
-	BacaMATRIKS(&r1);
-	BacaMATRIKS(&r2);
-	BacaMATRIKS(&r3);
-	BacaMATRIKS(&r4);
-
-
-	TulisMATRIKS(r1);
-
-
+	printf("%c", Elmt(CharMap(Ruang1), MakePOINT(1,1)));
 	return 0;
 }

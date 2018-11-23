@@ -1,4 +1,25 @@
 #include "peta.h"
+#include <string.h>
+
+void MakePETA(PETA *peta, char *namafile, POINT spawn){
+// membentuk sebuah peta ruangan, pokoke lengkap cuk!
+	//urusan nama file
+	char *namafilecharmap;
+	char *namafilevaluemap;
+	strcat(namafilecharmap, namafile);
+	strcat(namafilevaluemap, namafile);
+	strcat(namafilecharmap, ".txt");
+	strcat(namafilevaluemap, "int.txt");
+
+    MakeMATRIKS(&CharMap(*peta), 8, 8);
+    MakeMATRIKS(&ValueMap(*peta), 8, 8);
+    BacaFileMATRIKS(&CharMap(*peta), namafilecharmap);
+	BacaFileMATRIKS(&ValueMap(*peta), namafilevaluemap);
+
+	LokPlayer(*peta) = spawn;
+
+	Elmt(CharMap(*peta), LokPlayer(*peta)) = 'P';
+}
 
 POINT FindMeja(MATRIKS M, POINT P){
 // akan mengembalikan posisi meja yang dekat dengan player P
@@ -52,5 +73,13 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 	if (Elmt(*M,LEFT(meja))==KPENUH) Elmt(*M,LEFT(meja))=KKOSONG;
 	if (Elmt(*M,DOWN(meja))==KPENUH) Elmt(*M,DOWN(meja))=KKOSONG;
 	if (Elmt(*M,RIGHT(meja))==KPENUH) Elmt(*M,RIGHT(meja))=KKOSONG;
-
 }
+
+void UpdatePosisiPlayer(MATRIKS*M, POINT P){}
+// akan mengubah posisi player ke posisi baru P
+// I.S : P terdefinisi untuk player berpindah
+// F.S : jelas
+
+void GantiPeta(MATRIKS *M, int move){}
+// akan mengubah peta yang aktif dimainkan
+// F.S : jika move valid di suatu peta, peta akan berubah menjadi peta yang baru
