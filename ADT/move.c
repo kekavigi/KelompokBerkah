@@ -115,7 +115,7 @@ void UP1 (POINT *P, int *room_sekarang){
 				}
 			}
 		}else if(IsMejaKursi(P1,*room_sekarang)){
-			printf("Nabrak Boss\n");
+			printf("\n\nSTATUS : Nabrak Boss\n");
 		}
 	}
 }
@@ -141,7 +141,7 @@ void DOWN1 (POINT *P, int *room_sekarang){
 				}
 			}
 		}else if(IsMejaKursi(P1,*room_sekarang)){
-			printf("Nabrak Boss\n");
+			printf("\n\nSTATUS : Nabrak Boss\n");
 		}
 	}
 }
@@ -167,7 +167,7 @@ void LEFT1 (POINT *P, int *room_sekarang){
 				}
 			}
 		}else if(IsMejaKursi(P1,*room_sekarang)){
-			printf("Nabrak Boss\n");
+			printf("\n\nSTATUS : Nabrak Boss\n");
 		}
 
 	}
@@ -195,7 +195,7 @@ void RIGHT1 (POINT *P, int *room_sekarang){
 				}
 			}
 		}else if(IsMejaKursi(P1,*room_sekarang)){
-			printf("Nabrak Boss\n");
+			printf("\n\nSTATUS : Nabrak Boss\n");
 		}
 
 	}
