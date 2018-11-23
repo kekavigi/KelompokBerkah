@@ -7,11 +7,9 @@
 
 #include "boolean.h"
 /* Definisi bagian duduk */
-/*	Gw definisiin variabel baru sementara nomor meja, nanti kalo ada yang
-	lain juga yang definisiin variabel nomor meja gw ngikut */
-// Harusnya keka yang bikin definisi meja dan kapasitas
+
 #define JmlMeja 12
-#define Nil -999
+#define UndDuduk -999
 #define Habis 0
 
 typedef struct {
@@ -29,7 +27,7 @@ typedef struct {
 #define Avail(N,i) (N).Available[(i)]
 #define Sabar(N,i) (N).Kesabaran[(i)]
 #define Pesan(N,i) (N).Pesanan[(i)]
-/* Kalo ada yang bernilai Nil, maka belom didefinisiin */
+/* Kalo ada yang bernilai UndDuduk, maka belom didefinisiin */
 
 void SetEmptyDuduk (NoMeja *N);
 /*	I.S. Sembarang
