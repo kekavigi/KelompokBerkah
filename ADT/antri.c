@@ -4,6 +4,7 @@
 	
 #include <stdio.h>
 #include "antri.h"
+#include "player.h"
 
 void SetEmptyAntri (Queue *Q, int Max)
 //I.S. Sembarang
@@ -24,7 +25,7 @@ void DelCust (PLAYER *P, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, 
 //F.S. Head dihapus, info dari head dimasukin ke variabel di atas. Nyawa kurang 1.
 {
 	DelQueue (Q, P, T, J, W, K);
-	Health(*P) = Health(*P) - 1;
+	UPDATE_LIFE (P);
 }
 
 boolean CekSabarAntri (Queue Q)
