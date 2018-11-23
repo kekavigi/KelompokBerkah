@@ -11,9 +11,6 @@
 
 /* 	Di sini gw gabuat tipe bentukan antrian, soalnya si Dendi udah buat
 	tipe bentukan queue yang udah mencukupi buat antrian */
-
-/* Di sini gw definisiin nyawa, nanti diganti setelah liat code Fio */
-int Life;
 	
 void SetEmptyAntri (Queue *Q, int Max);
 //I.S. Sembarang
@@ -23,7 +20,7 @@ void TambahCust (Queue *Q, time T, jumlah J, waiting W, kesabaran K);
 //I.S. Q mungkin kosong, tabel tidak penuh
 //F.S. Masukan di atas jadi tail baru, circular buffer.
 
-void DelCust (Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K);
+void DelCust (PLAYER *P, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K);
 //I.S. Q tidak kosong
 //F.S. Head dihapus, info dari head dimasukin ke variabel di atas. Nyawa kurang 1.
 
@@ -35,8 +32,8 @@ void UpdateSabarAntri (Queue *Q);
 /*	Setiap langkah yang player lakukan, bakal ngurangin sabar setiap yang antri */
 // I.S. Asumsi gak ada yang kesabarannya 0
 
-void PlaceCustAntri (NoMeja N, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K);
-//	Ini sama persis kayak DelCust, cuma nyawanya gak ngurang dan ditempatin di meja tertentu
+void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, time *T, jumlah *J, waiting *W, kesabaran *K);
+//	Ini sama persis kayak DelCust, cuma nyawanya gak ngurang dan ditempatin di meja tertentu. X nomor meja yang dituju
 //	Langsung diisi informasi buat meja yang dipake di duduk.h
 
 #endif

@@ -10,50 +10,46 @@
 /*	Gw definisiin variabel baru sementara nomor meja, nanti kalo ada yang
 	lain juga yang definisiin variabel nomor meja gw ngikut */
 // Harusnya keka yang bikin definisi meja dan kapasitas
-#define JmlMeja 4
+#define JmlMeja 12
 #define Nil -999
 #define Habis 0
 
 typedef struct {
-	int Nomor;
-	int Capacity;
-	int Isi; //ini menyatakan jumlah yang diisi dari meja
-	boolean Available; 	//ini menyatakan apakah meja udah didudukin apa belum
+	int Capacity[13];
+	int Isi[13]; //ini menyatakan jumlah yang diisi dari meja
+	boolean Available[13]; 	//ini menyatakan apakah meja udah didudukin apa belum
 						//kalo udah didudukin bernilai false
-	int Kesabaran;
-	int Pesanan; // dalam integer, ngurut sesuai urutan di tree
+	int Kesabaran[13];
+	int Pesanan[13]; // dalam integer, ngurut sesuai urutan di tree
 } NoMeja;
 
-/* Jika N adalah NoMeja, maka akses elemen: */
-#define No(N) (N).Nomor
-#define Cap(N) (N).Capacity
-#define Isi(N) (N).Isi
-#define Avail(N) (N).Available
-#define Sabar(N) (N).Kesabaran
-#define Pesan(N) (N).Pesanan
+/* Jika N adalah NoMeja, dan i adalah nomor mejanya, maka akses elemen: */
+#define Cap(N,i) (N).Capacity[(i)]
+#define Isi(N,i) (N).Isi[(i)]
+#define Avail(N,i) (N).Available[(i)]
+#define Sabar(N,i) (N).Kesabaran[(i)]
+#define Pesan(N,i) (N).Pesanan[(i)]
 /* Kalo ada yang bernilai Nil, maka belom didefinisiin */
 
-/* Di sini gw definisiin nyawa, nanti diganti setelah liat code Fio */
-
-void SetEmpty ();
+void SetEmpty (NoMeja *N);
 /*	I.S. Sembarang
 	F.S. Semua kursi di ruangan tertentu dibikin kosong */
 	
-boolean CekKosong (NoMeja N);
+boolean CekKosong (NoMeja N, int X);
 // hasilnya true kalo meja N kosong
-// I.S.	N diasumsikan benar
+// I.S.	X diasumsikan benar
 
-int CekKapasitas (NoMeja N);
-// I.S. N diasumsikan benar
+int CekKapasitas (NoMeja N, int X);
+// I.S. X diasumsikan benar
 
-void DelDuduk (NoMeja N);
+void DelDuduk (NoMeja *N, int X);
 /*	I.S. N diasumsikan benar. Tempat duduk tidak kosong
 	F.S. Tempat duduk di meja N kosong */
 
-boolean CekKesabaranDuduk ();
-// hasilnya true kalo ada yang kesabarannya jadi 0
+int JmlSabarHabis (NoMeja N);
+// menghasilkan berapa yang kesabaran habis
 
-void UpdateKesabaranDuduk ();
+void UpdateKesabaranDuduk (NoMeja *N);
 // untuk setiap gerakan, per ruangan setiap meja kesabaran kurang 1
 
 /* PlaceCustDuduk () ini gak perlu sama kayak di antri (PlaceCustAntri)*/
@@ -61,7 +57,7 @@ void UpdateKesabaranDuduk ();
 /* CekPesanan (); ini gak perlu, soalnya udah ada Pesan(N) */
 
 /* MakeRandomPesanan (); udah tersedia di (PlaceCustAntri) */
-void DelSabarDuduk (NoMeja N, PLAYER *P);
+void DelSabarDuduk (NoMeja *N, PLAYER *P);
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
 
 #endif

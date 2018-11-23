@@ -1,76 +1,76 @@
-/* 	File: antri.c
+/* 	File: duduk.c
 	Tanggal: 17 November 2018 
 	Wanul                     */
 	
 #include <stdio.h>
 #include "duduk.h"
+#include "player.h"
 
-void SetEmpty ()
+void SetEmpty (NoMeja *N)
 /*	I.S. Sembarang
 	F.S. Semua kursi di ruangan tertentu dibikin kosong */
 {
-	int N = 1;
-	while (N <= JmlMeja)
+	int i = 1;
+	while (i <= JmlMeja)
 	{
-		Isi(N) = 0;
-		Avail(N) = true;
-		Sabar(N) = Nil;
-		Pesan(N) = Nil;
-		N = N + 1;
+		Isi(*N,i) = 0;
+		Avail(*N,i) = true;
+		Sabar(*N,i) = Nil;
+		Pesan(*N,i) = Nil;
 	}
 }		
 	
-boolean CekKosong (NoMeja N)
+boolean CekKosong (NoMeja N, int X)
 // hasilnya true kalo meja N kosong
-// I.S.	N diasumsikan benar
+// I.S.	X diasumsikan benar
 {
-	return (Avail(N));
+	return (Avail(N,X));
 }
 
-int CekKapasitas (NoMeja N)
-// I.S. N diasumsikan benar
+int CekKapasitas (NoMeja N, int X)
+// I.S. X diasumsikan benar
 {
-	return (Cap(N));
+	return (Cap(N,X));
 }
 
-void DelDuduk (NoMeja N)
-/*	I.S. N diasumsikan benar. Tempat duduk tidak kosong
+void DelDuduk (NoMeja *N, int X)
+/*	I.S. X diasumsikan benar. Tempat duduk tidak kosong
 	F.S. Tempat duduk di meja N kosong */
 {
-	Isi(N) = 0;
-	Avail(N) = true;
-	Sabar(N) = Nil;
-	Pesan(N) = Nil;
+	Isi(*N,i) = 0;
+	Avail(*N,i) = true;
+	Sabar(*N,i) = Nil;
+	Pesan(*N,i) = Nil;
 }
 
-boolean CekKesabaranDuduk ()
-// hasilnya true kalo ada yang kesabarannya jadi 0
+int JmlSabarHabis (NoMeja N)
+// menghasilkan berapa yang kesabaran habis
 {
-	boolean cek = false;
-	int N = 1;
-	while (N <= JmlMeja)
+	int i = 1, out = 0;
+	while (i <= JmlMeja)
 	{
-		if (!Avail(N))
+		if (!Avail(N,i))
 		{
-			if (Sabar(N) == Habis)
+			if (Sabar(N,i) == Habis)
 			{
-				cek = true;
+				out = out + 1;
 			}
 		}
-		N = N + 1;
+		i = i + 1;
 	}
+	return (out);
 }
-void UpdateKesabaranDuduk ()
+void UpdateKesabaranDuduk (NoMeja *N)
 // untuk setiap gerakan, per ruangan setiap meja kesabaran kurang 1
 {
-	int N = 1;
-	while (N <= JmlMeja)
+	int i = 1;
+	while (i <= JmlMeja)
 	{
-		if (!Avail(N))
+		if (!Avail(*N,i))
 		{
-			Sabar(N) = Sabar(N) - 1;
+			Sabar(*N,i) = Sabar(*N,i) - 1;
 		}
-		N = N + 1;
+		i = i + 1;
 	}
 }
 /* PlaceCustDuduk () ini gak perlu sama kayak di antri (PlaceCustAntri)*/
@@ -78,12 +78,23 @@ void UpdateKesabaranDuduk ()
 /* CekPesanan (); ini gak perlu, soalnya udah ada Pesan(N) */
 
 /* MakeRandomPesanan (); udah tersedia di (PlaceCustAntri) */
-void DelSabarDuduk (NoMeja N, Life *L)
+void DelSabarDuduk (NoMeja *N, PLAYER *P)
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
 {
-	Isi(N) = 0;
-	Avail(N) = true;
-	Sabar(N) = Nil;
-	Pesan(N) = Nil;
-	*L = *L - 1;
+	int i = 1;
+	while (i <= JmlMeja)
+	{
+		if (!Avail(*N,i))
+		{
+			if (Sabar(*N,i) == Habis)
+			{
+				Isi(*N,i) = 0;
+				Avail(*N,i) = true;
+				Sabar(*N,i) = Nil;
+				Pesan(*N,i) = Nil;
+				Health(*P) = Health(*P) - 1;
+			}
+		}
+		i = i + 1;
+	}
 }
