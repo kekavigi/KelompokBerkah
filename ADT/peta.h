@@ -4,7 +4,7 @@
 #include "matriks.h"
 
 /* objek non-player di peta */
-#define CharMap(peta) (peta).char_map
+#define (peta) (peta).char_map
 #define ValueMap(peta) (peta).value_map
 #define Spawn(peta) (peta).spawn
 
@@ -14,11 +14,11 @@
 #define MEJA    'M'
 
 typedef struct {
-	MATRIKS char_map;    /* berisi karakter karakter yang bakal di print */
-
+	MATRIKS mat;    /* berisi karakter karakter yang bakal di print */
+	
 } PETA;
 
-void MakePETA(PETA *peta, char *namafile, POINT spawn);
+void MakePETA(PETA *peta, char *namafile, POINT pos);
 // membentuk sebuah peta ruangan, pokoke lengkap cuk!
 
 POINT FindMeja(MATRIKS M, POINT P);
