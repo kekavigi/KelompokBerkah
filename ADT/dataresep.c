@@ -1,4 +1,4 @@
-#include "datatype.h"
+#include "dataresep.h"
 
 char bahan[25][20] = {
     "", //0 kosong
