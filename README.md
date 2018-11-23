@@ -1,32 +1,19 @@
 # Kelompok Berkah
 memudahkan ngegabung mungkin bisa tulis ulang file .h disini secara ringkas, gini:
 
-### define
-apa aja yang didefine
-
-### adt
-* adt
-	* komponennya
-
-### sisanya
-* void aaa
-* int bbb
-* dst
-
-------------
 # Peta
 
-### define
+## define
 * UBIN '_'
 * KKOSONG 'C'
 * KPENUH 'X'
 * MEJA 'M'
 
-### adt
+## adt
 *PETA
 	* char_map
 
-### sisanya
+## sisanya
 * void MakePETA(PETA *peta, char *namafile, POINT spawn);
 * POINT FindMeja(MATRIKS M, POINT P);
 * int CountObjek(MATRIKS M, POINT P, char objek);
@@ -36,20 +23,19 @@ apa aja yang didefine
 * void TulisPETA(PETA peta);
 * void GantiPeta(MATRIKS *M, int move);
 
-------------
 # POINT
 
-### define
+## define
 * Absis(P) (P).X
 * Ordinat(P) (P).Y
 
-### adt
+## adt
 * POINT
 	* int X; /* absis   */
 	* int Y; /* ordinat */
 
 
-### sisanya
+## sisanya
 * POINT MakePOINT (int X, int Y);
 * void BacaPOINT (POINT * P); 
 * void TulisPOINT (POINT P);
@@ -63,3 +49,25 @@ apa aja yang didefine
 * POINT DOWN (POINT P);
 * POINT LEFT (POINT P);
 * POINT RIGHT (POINT P);
+
+# PLAYER
+
+## define
+* Health(P) (P).Life
+* Money(P) (P).Money
+* Posisi(P) (P).Posisi
+* PX(P) Absis((P).Posisi)
+* PY(P) Ordinat((P).Posisi)
+
+## adt
+*PLAYER
+	* int Life; /* Nyawa Player   */
+	* int Money; /* Uang Player */
+	* POINT Posisi; /* Posisi Player */ 
+
+## sisanya
+void START_PLAYER(PLAYER *P);
+boolean HEALTH_CUKUP(PLAYER P);
+void UPDATE_MONEY(PLAYER *P, int X);
+void UPDATE_POSISI(PLAYER *P, int X);
+void UPDATE_LIFE(PLAYER *P);
