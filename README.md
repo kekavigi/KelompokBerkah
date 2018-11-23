@@ -1,50 +1,65 @@
 # Kelompok Berkah
+memudahkan ngegabung mungkin bisa tulis ulang file .h disini secara ringkas, gini:
 
-#CumaBiarNggaGilaSendiri
+### define
+apa aja yang didefine
 
----------------------------------------------------------------
+### adt
+* adt
+	* komponennya
 
-* ADT POINT
-	* int X
-	* int Y
+### sisanya
+* void aaa
+* int bbb
+* dst
 
-POINT 	MakePOINT (int X, int Y);
-void 	BacaPOINT (POINT * P); 
-void 	TulisPOINT (POINT P);
-boolean EQ (POINT P1, POINT P2);
-boolean IsOrigin (POINT P);
-boolean IsOnSbX (POINT P);
-boolean IsOnSbY (POINT P);
-boolean IsDinding (POINT P);
-boolean IsVal(POINT P);
-POINT 	UP (POINT P);
-POINT 	DOWN (POINT P);
-POINT 	LEFT (POINT P);
-POINT 	RIGHT (POINT P);
-----------------------------------------------------------------
+------------
+# Peta
 
-* ADT MATRIKS
-	* int Mem[1+8][1+8]		<- matriksnya
-	* int NXeff
-	* int NYEff
+### define
+* UBIN '_'
+* KKOSONG 'C'
+* KPENUH 'X'
+* MEJA 'M'
 
-void	MakeMATRIKS (MATRIKS * M, int X, int Y);
-void	BacaFileMATRIKS (MATRIKS *M, char *namafile);
-void	TulisMATRIKS (MATRIKS M);	
+### adt
+*PETA
+	* char_map
 
-----------------------------------------------------------------
+### sisanya
+* void MakePETA(PETA *peta, char *namafile, POINT spawn);
+* POINT FindMeja(MATRIKS M, POINT P);
+* int CountObjek(MATRIKS M, POINT P, char objek);
+* void IsiKursiKosong(MATRIKS *M, POINT P, int minta);
+* void JadikanKursiKosong(MATRIKS *M, POINT P);
+* void UpdatePosisiPlayer(MATRIKS*M, POINT P);
+* void TulisPETA(PETA peta);
+* void GantiPeta(MATRIKS *M, int move);
 
-* ADT PETA
-	* MATRIKS char_map		<- isinya karakter
-	* MATRIKS value_map		<- isinya angka, dipakai kalau mau
-	* POINT pos				<- posisi player
+------------
+# POINT
 
-void 	MakePETA(PETA *peta, char *namafile)
-POINT	FindMeja(MATRIKS M, POINT P)
-int		CountObjek(MATRIKS M, POINT P, char objek)
-void 	IsiKursiKosong(MATRIKS *M, POINT P, int minta)
-void	JadikanKursiKosong(MATRIKS *M, POINT P)
-void	UpdatePosisiPlayer(MATRIKS*M, POINT P)
-void	TulisPETA(PETA peta)
-void	GantiPeta(MATRIKS *M, int move)
+### define
+* Absis(P) (P).X
+* Ordinat(P) (P).Y
 
+### adt
+* POINT
+	* int X; /* absis   */
+	* int Y; /* ordinat */
+
+
+### sisanya
+* POINT MakePOINT (int X, int Y);
+* void BacaPOINT (POINT * P); 
+* void TulisPOINT (POINT P);
+* boolean EQ (POINT P1, POINT P2);
+* boolean IsOrigin (POINT P);
+* boolean IsOnSbX (POINT P);
+* boolean IsOnSbY (POINT P);
+* boolean IsDinding (POINT P);
+* boolean IsVal(POINT P);
+* POINT UP (POINT P);
+* POINT DOWN (POINT P);
+* POINT LEFT (POINT P);
+* POINT RIGHT (POINT P);

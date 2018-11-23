@@ -15,10 +15,7 @@
 
 typedef struct {
 	MATRIKS char_map;    /* berisi karakter karakter yang bakal di print */
-  MATRIKS value_map;   /* berisi angka angka yg mungkin diperlukan */
-	POINT spawn;         /* lokasi spawn player di suatu peta */
-	POINT pintu1, pintu2;/* lokasi pintu-pintu di suatu peta */
-	POINT pos  					 /* posisi player saat ini */
+
 } PETA;
 
 void MakePETA(PETA *peta, char *namafile, POINT spawn);
