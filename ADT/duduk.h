@@ -15,7 +15,7 @@
 #define Habis 0
 
 typedef struct {
-	int Capacity[13];
+	int Capacity[13] = {0,4,2,4,2,4,2,4,2,4,2,4,2};
 	int Isi[13]; //ini menyatakan jumlah yang diisi dari meja
 	boolean Available[13]; 	//ini menyatakan apakah meja udah didudukin apa belum
 						//kalo udah didudukin bernilai false
@@ -31,7 +31,7 @@ typedef struct {
 #define Pesan(N,i) (N).Pesanan[(i)]
 /* Kalo ada yang bernilai Nil, maka belom didefinisiin */
 
-void SetEmpty (NoMeja *N);
+void SetEmptyDuduk (NoMeja *N);
 /*	I.S. Sembarang
 	F.S. Semua kursi di ruangan tertentu dibikin kosong */
 	
