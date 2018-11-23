@@ -83,7 +83,7 @@ void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabar
 		Isi(N,X) = jumlahHead(*Q);
 		Sabar(N,X) = J_DUDUK();
 		Pesan(N,X) = rand() % (8 + 1 - 1) + 1;
-		DelQueue (Q, P, T, J, K);
+		DelQueue (Q, P, J, K);
 	}
 	else
 	{
