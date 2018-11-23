@@ -15,7 +15,7 @@ POINT FindMeja(MATRIKS M, POINT P);
 				jika customer di left player, ada meja di left customer
 				jika customer di down player, ada meja di down customer
 				...*/
-        
+
 int CountObjek(MATRIKS M, POINT P, char objek);
 // akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right player;
 
@@ -26,9 +26,16 @@ void IsiKursiKosong(MATRIKS *M, POINT P, int minta);
 		 		 jika tidak, tidak ada yang terjadi */
 
 void JadikanKursiKosong(MATRIKS *M, POINT P);
-// akan menjadikan kursi penuh di sebuah meja,
-// di dekat posisi player P, menjadi kosong kembali
+// akan menjadikan semua state kursi penuh menjadi kursi kosong
+// I.S : sisi left, down, right, dan up meja terdefinisi
+// F.S : jelas
 
-void UpdatePeta(MATRIKS*M, POINT P);
+void UpdatePosisiPlayer(MATRIKS*M, POINT P);
+// akan mengubah posisi player ke posisi baru P
+// I.S : P terdefinisi untuk player berpindah
+// F.S : jelas
+
+void GantiPeta(*M, int move);
+// akan mengubah peta yang aktif
 
 #endif

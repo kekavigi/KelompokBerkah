@@ -44,13 +44,13 @@ void IsiKursiKosong(MATRIKS *M, POINT P, int minta){
 	};
 }
 
-void JadikanKursiKosong(MATRIKS *M, POINT P){
-	POINT meja = FindMeja(*M,P);
+void JadikanKursiKosong(MATRIKS *M, POINT meja){
+// akan menjadikan semua state kursi penuh menjadi kursi kosong
+// I.S : sisi left, down, right, dan up meja terdefinisi
+// F.S : jelas
+	if (Elmt(*M,UP(meja))==KPENUH) Elmt(*M,UP(meja))=KKOSONG;
+	if (Elmt(*M,LEFT(meja))==KPENUH) Elmt(*M,LEFT(meja))=KKOSONG;
+	if (Elmt(*M,DOWN(meja))==KPENUH) Elmt(*M,DOWN(meja))=KKOSONG;
+	if (Elmt(*M,RIGHT(meja))==KPENUH) Elmt(*M,RIGHT(meja))=KKOSONG;
 
-	if (Elmt(*M,UP(P))==KPENUH) Elmt(*M,UP(P))=KKOSONG;
-	if (Elmt(*M,LEFT(P))==KPENUH) Elmt(*M,LEFT(P))=KKOSONG;
-	if (Elmt(*M,DOWN(P))==KPENUH) Elmt(*M,DOWN(P))=KKOSONG;
-	if (Elmt(*M,RIGHT(P))==KPENUH) Elmt(*M,RIGHT(P))=KKOSONG;
 }
-// akan menjadikan semua kursi penuh di sebuah meja,
-// yang di dekat posisi player P, menjadi kosong kembali
