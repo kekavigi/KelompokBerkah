@@ -1,6 +1,7 @@
 #include "bintree.h"
 #include "mesinkar.c"
 #include "datatype.c"
+#include "stackt.c"
 
 /***********************ADT POHON BINER********************************/
 /*** Konstruktor ***/
@@ -171,7 +172,7 @@ void PrintPostorder (BinTree P)
 	}
 }
 void ShowBranch (BinTree P)
-/* Menunjukkan alur dari semua cabang pohon biner */
+
 {
 	//Kamus
 	int Slash[100]; //Index yang menyimpan posisi tempat mencetak '|'
@@ -181,111 +182,72 @@ void ShowBranch (BinTree P)
 		Slash[i] = 0;
 	}
 		
-	PrintTree (P, 7, 5,Slash);
+	PrintTree (P, 5, 4,Slash);
 }
-void PrintBranch(int h, int * ArrSlash)
+void PrintBranch(int h)
 /* Fungsi Pembantu PrintTree() */
 {	int i;
 	for ( i = 1; i < h; i++){
-		boolean found = false;
-		int j = 0;
-		while ((!found) && (j < 100)) {
-			if ( ArrSlash[j] == i)
-				found = true;
-			else
-				j += 1;
-		}
-		if (found)
-			printf("|");
-		else
-			printf(" ");
+		printf(" ");
 	}
 }
-void PrintTree (BinTree P, int dh, int hc, int * ArrSlash)
+void PrintTree (BinTree P, int inden1, int inden2, int * ArrSlash)
 //I.S. P terdefinisi, h adalah jarak indentasi
 //F.S. Semua simpul P sudah ditulis dengan indentasi
 {
 	//Kamus Lokal
 	int i,j,k;
-	int slashtemp = hc + dh/2;
+	int subakar = inden2 + inden1/2;
 	//Algoritma
 	if (!IsTreeEmpty(P)) {
 		if (Akar(P) == 1){
-			for ( k = 1;k < dh;k++)
-				printf(" ");
+			printf("*RESEP MAKANAN* \n");
 		}
-		printf("(%d)", Akar(P));
+		
 		puts(bahan[Akar(P)]);
 		if (!IsTreeEmpty(Left(P))) {
-			PrintBranch(slashtemp,ArrSlash);
+			PrintBranch(subakar);
 			i = 0;
-			while ((ArrSlash[i] != 0) && (ArrSlash[i] != slashtemp)){
+			while ((ArrSlash[i] != 0) && (ArrSlash[i] != subakar)){
 				i += 1;
 			}
 			if(ArrSlash[i] == 0){
-				ArrSlash[i] = slashtemp;
+				ArrSlash[i] = subakar;
 			}
 			printf("|");
-			for ( j = 1; j < dh/2; j++){
+			for ( j = 1; j < 2; j++){
 				printf("-");
 			} 
 			printf(">");
 			j = 1;
-			PrintTree(Left(P), dh, hc+dh, ArrSlash);
+			PrintTree(Left(P), inden1, inden2+inden1, ArrSlash);
 		}
 		if (!IsTreeEmpty(Right(P))) {
-			PrintBranch(slashtemp,ArrSlash);
+			PrintBranch(subakar);
 			i = 0;
-			while ((ArrSlash[i] != 0) && (ArrSlash[i] != slashtemp)){
+			while ((ArrSlash[i] != 0) && (ArrSlash[i] != subakar)){
 				i += 1;
 			}
 			if(ArrSlash[i] == 0){
-				ArrSlash[i] = slashtemp;
+				ArrSlash[i] = subakar;
 			}
 			printf("|");
-			for (j = 1; j < dh/2; j++){
+			for (j = 1; j < 2; j++){
 				printf("-");
 			} 
 			printf(">");
 			j = 0;
 			/*Delete "|" setelah melewati cabang kanan */
 			while (ArrSlash[j] != 0){
-				if (ArrSlash[j] == slashtemp){
+				if (ArrSlash[j] == subakar){
 					ArrSlash[j] = -999;
 				}
 				j += 1;
 			}	
-			PrintTree(Right(P), dh, hc+dh, ArrSlash);
+			PrintTree(Right(P), inden1, inden2+inden1, ArrSlash);
 		}
 	}
 }
-/*** Searching ***/
-
-//BinTree SearchPBCode (BinTree P, int X)
-/* Mencari dan mengembalikan nilai alamat akar tempat X ditemukan dalam P */
-/*{
-	//Kamus Lokal
-	BinTree PTempA,PTempB;
-	//Algoritma
-	if (IsTreeEmpty(P)){
-		return NilTree;
-	}
-	else{
-		if (X == Akar(P)){
-			return P;
-		}
-		else{
-			PTempA = SearchPBCode(Left(P),X);
-			if (PTempA == NilTree){
-				PTempB = SearchPBCode(Right(P),X);
-				return PTempB;
-			}
-			else{
-				return PTempA;
-			}
-		}
-	}
-}*/
 boolean SearchPB (BinTree P, int X)
 //Mengirimkan true jika ada node dari P yang bernilai X
 {
@@ -630,12 +592,3 @@ void  LoadRecipe (BinTree *P)
   //Algoritma
   LoadTree(P);
 }
-/*
-int main(){
-	//kamus
-	BinTree Resep;
-	//algoritma
-	LoadTree(&Resep);
-	ShowBranch(Resep);
-	return 0;
-}*/
