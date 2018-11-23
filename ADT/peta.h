@@ -8,6 +8,7 @@
 #define Pos(peta) (peta).pos
 #define StatMeja(peta) (peta).statmej
 #define Wadah(peta) (peta).wadah
+#define Rum(peta) (peta).room
 /* objek non-player di peta */
 #define UBIN    '_'
 #define KKOSONG 'C'
@@ -16,12 +17,13 @@
 
 typedef struct {
 	MATRIKS mat;    /* berisi karakter karakter yang bakal di print */
-	POINT pos;					/* posisi player */
-	TabInt statmej;  /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
-	TabInt wadah; /* nomor nampan */
+	POINT pos;			/* posisi player */
+	int room;				/* nomor room */
+	TabInt statmej; /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
+	TabInt wadah; 	/* nomor nampan */
 } PETA;
 
-void MakePETA(PETA *peta, char *namafile, POINT pos);
+void MakePETA(PETA *peta, char *namafile, int room, POINT pos);
 // membentuk sebuah peta ruangan, pokoke lengkap cuk!
 
 POINT FindMeja(MATRIKS M, POINT P);
@@ -45,15 +47,10 @@ void JadikanKursiKosong(MATRIKS *M, POINT P);
 // I.S : sisi left, down, right, dan up meja terdefinisi
 // F.S : jelas
 
-void UpdatePosisiPlayer(MATRIKS*M, POINT P);
-// akan mengubah posisi player ke posisi baru P
-// I.S : P terdefinisi untuk player berpindah
-// F.S : jelas
+void UpdatePETA(PETA peta, int X);
+// mengirimkan peta yang baru akibat gerakan X
 
 void TulisPETA(PETA peta);
-
-//void GantiPeta(MATRIKS *M, int move);
-// akan mengubah peta yang aktif dimainkan
-// F.S : jika move valid di suatu peta, peta akan berubah menjadi peta yang baru
+// mencetak peta ke layar
 
 #endif

@@ -1,11 +1,13 @@
 #include "peta.h"
+#include "move.h"
 #include <string.h>
 #include <stdio.h>
 
-void MakePETA(PETA *peta, char *namafile, POINT pos){
+void MakePETA(PETA *peta, char *namafile, int room, POINT pos){
 	MakeMATRIKS(&Mat(*peta), 8, 8);
 	BacaFileMATRIKS(&Mat(*peta), namafile);
 	Pos(*peta) = pos;
+	Rum(*peta) = room;
 }
 
 POINT FindMeja(MATRIKS M, POINT P){
@@ -62,12 +64,17 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 	if (ElmtMat(*M,RIGHT(meja))==KPENUH) ElmtMat(*M,RIGHT(meja))=KKOSONG;
 }
 
+PETA UpdatePETA(PETA peta, int X){
+// mengirimkan peta yang baru akibat gerakan X
+	POINT P = Posisi(Pos(peta));
+	int room= Rum(peta);
+
+	//UPDATE_POSISI_PLAYER()
+
+}
 
 void TulisPETA(PETA peta){
+// mencetak peta ke layar
 		ElmtMat(Mat(peta), Pos(peta)) = 'P';
 		TulisMATRIKS(Mat(peta));
 }
-
-//void GantiPeta(MATRIKS *M, int move){}
-// akan mengubah peta yang aktif dimainkan
-// F.S : jika move valid di suatu peta, peta akan berubah menjadi peta yang baru
