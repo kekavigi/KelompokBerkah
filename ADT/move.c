@@ -63,7 +63,7 @@ boolean IsMejaKursi(POINT P, int room){
 			    (Absis(P)==5 && Ordinat(P)==1) || (Absis(P)==6 && Ordinat(P)==1) ||
 			    (Absis(P)==7 && Ordinat(P)==1) || (Absis(P)==8 && Ordinat(P)==1) ||
 			    (Absis(P)==4 && Ordinat(P)==4) || (Absis(P)==5 && Ordinat(P)==4) ||
-			    (Absis(P)==8 && Ordinat(P)==8));
+			    (Absis(P)==6 && Ordinat(P) =4) || (Absis(P)==8 && Ordinat(P)==8));
 	}else{ // Selain ruangan 1 (DAPUR), posisi objek sama aja
 		return ((Absis(P)==2 && Ordinat(P)==1) || (Absis(P)==3 && Ordinat(P)==2) ||
 			    (Absis(P)==2 && Ordinat(P)==3) || (Absis(P)==1 && Ordinat(P)==2) ||
