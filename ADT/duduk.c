@@ -3,8 +3,8 @@
 	Wanul                     */
 	
 #include <stdio.h>
+#include <stdlib.h>
 #include "duduk.h"
-#include "player.h"
 
 void SetEmptyDuduk (NoMeja *N)
 /*	I.S. Sembarang
@@ -37,10 +37,10 @@ void DelDuduk (NoMeja *N, int X)
 /*	I.S. X diasumsikan benar. Tempat duduk tidak kosong
 	F.S. Tempat duduk di meja N kosong */
 {
-	Isi(*N,i) = 0;
-	Avail(*N,i) = true;
-	Sabar(*N,i) = UndDuduk;
-	Pesan(*N,i) = UndDuduk;
+	Isi(*N,X) = 0;
+	Avail(*N,X) = true;
+	Sabar(*N,X) = UndDuduk;
+	Pesan(*N,X) = UndDuduk;
 }
 
 int JmlSabarHabis (NoMeja N)
@@ -73,11 +73,7 @@ void UpdateKesabaranDuduk (NoMeja *N)
 		i = i + 1;
 	}
 }
-/* PlaceCustDuduk () ini gak perlu sama kayak di antri (PlaceCustAntri)*/
 
-/* CekPesanan (); ini gak perlu, soalnya udah ada Pesan(N) */
-
-/* MakeRandomPesanan (); udah tersedia di (PlaceCustAntri) */
 void DelSabarDuduk (NoMeja *N, PLAYER *P)
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
 {
@@ -97,4 +93,30 @@ void DelSabarDuduk (NoMeja *N, PLAYER *P)
 		}
 		i = i + 1;
 	}
+}
+
+void IsiCap (NoMeja *N)
+// ngisi capacity setiap kursi
+{
+	int i = 0;
+	while (i <= JmlMeja)
+	{
+		if (i == 0)
+		{
+			Cap(*N,i) = 0;
+		}
+		else if (i%2 == 0)
+		{
+			Cap(*N,i) = 2;
+		}
+		else if (i%2 == 1)
+		{
+			Cap(*N,i) = 4;
+		}
+		i = i + 1;
+	}
+}
+int main ()
+{
+	return 0;
 }
