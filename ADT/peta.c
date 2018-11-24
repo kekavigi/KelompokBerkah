@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#include <stdio.h>
+
 void MakePETA(PETA *peta, char *namafile, int room, POINT pos){
 	MakeMATRIKS(&Mat(*peta), 8, 8);
 	BacaFileMATRIKS(&Mat(*peta), namafile);
@@ -65,29 +67,34 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 	if (ElmtMat(*M,RIGHT(meja))==KPENUH) ElmtMat(*M,RIGHT(meja))=KKOSONG;
 }
 
-/*
 void UpdatePETA(PETA *peta, int X){
-	POINT P  = Pos(*peta);
-	int room = Rum(*peta);
+	PLAYER P;
+	START_PLAYER(&P);
+	Posisi(P) = Pos(*peta);
+	int room  = Rum(*peta);
 
 	UPDATE_POSISI_PLAYER(&P, X, &room);
+
+	TulisPOINT(Pos(*peta)); printf("\n");
+	TulisPOINT(Posisi(P)) ; printf("\n");
+
 	if (room!=Rum(*peta)){
-			//player pindah ruangan, simpan apapun yang terjadi di RuangAktif ke Ruang bersesuaian
+			//player pindah ruangan, simpan apapun yang terjadi di RuangAktif ke Ruang yang bersesuaian
+			//jika awalnya rum1, update rum1...
 			if 			(Rum(*peta)==1) Ruang1 = *peta;
 			else if (Rum(*peta)==2) Ruang2 = *peta;
 			else if (Rum(*peta)==3) Ruang3 = *peta;
 			else									  Dapur  = *peta;
-			//sekarang update peta
+			//sekarang update peta, jika room=1, fetch data Ruang1
 			if 			(room==1) *peta = Ruang1;
 			else if (room==2) *peta = Ruang2;
 			else if (room==3) *peta = Ruang3;
 			else							*peta = Dapur;
-		};
-		//sekarang update detail peta like
-		Rum(*peta) = room;
-		Pos(*peta) = P;
+			Rum(*peta) = room;
+	};
+	//kalau sudah update room peta, atau ngga ubah room peta, tinggal
+	Pos(*peta) = Posisi(P);
 };
-*/
 
 void TulisPETA(PETA peta){
 // mencetak peta ke layar

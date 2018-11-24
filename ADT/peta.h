@@ -23,6 +23,8 @@ typedef struct {
 	TabInt wadah; 	/* nomor nampan */
 } PETA;
 
+PETA Ruang1, Ruang2, Ruang3, Dapur, RuangAktif;
+
 void MakePETA(PETA *peta, char *namafile, int room, POINT pos);
 // membentuk sebuah peta ruangan, pokoke lengkap cuk!
 

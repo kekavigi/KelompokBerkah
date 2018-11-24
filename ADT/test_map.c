@@ -3,21 +3,23 @@
 #include <string.h>
 #include <stdio.h>
 
-PLAYER Human;
-PETA Ruang1, Ruang2, Ruang3, Dapur, RuangAktif;
-
 int main(){
 	//inisialisasi
+	PLAYER Human;
 	START_PLAYER(&Human);
-
-	MakePETA(&Ruang1, "ruang1.txt", 1, MakePOINT(0,0));
-	MakePETA(&Ruang2, "ruang2.txt", 2, MakePOINT(0,0));
-	MakePETA(&Ruang3, "ruang3.txt", 3, MakePOINT(0,0));
-	MakePETA(&Dapur,  "ruang4.txt", 4, Posisi(Human));
+	MakePETA(&Ruang1, "ruang1.txt", 2, MakePOINT(0,0));
+	MakePETA(&Ruang2, "ruang2.txt", 3, MakePOINT(0,0));
+	MakePETA(&Ruang3, "ruang3.txt", 4, MakePOINT(0,0));
+	MakePETA(&Dapur,  "ruang4.txt", 1, Posisi(Human));
 	RuangAktif = Dapur;
 
-	int inp=0;
-	while (inp!=-1){
+	int inp;
+
+	do {
+		TulisPETA(RuangAktif);
 		scanf("%d", &inp);
-		}
+		UpdatePETA(&RuangAktif, inp);
+	} while (inp!=-1);
+
+	return 0;
 }
