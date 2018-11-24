@@ -46,28 +46,11 @@ void CreateEmptyQueue (Queue * Q, int Max)
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi,Membuat sebuah Q kosong */
 {
-    (*Q).K = (kesabaran *) malloc ((Max + 1) * sizeof(kesabaran));
-    if ((*Q).K == NULL)
-    {
-        MaxElQ(*Q) = Nil;
-    }
-    else
-    {
-        MaxElQ(*Q) = Max;
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
-    }
+    MaxElQ(*Q) = Max;
+    Head(*Q) = Nil;
+    Tail(*Q) = Nil;
 }
-/* *** Destruktor *** */
-void DealokasiQueue (Queue * Q)
-/* Proses: Mengembalikan memori Q */
-/* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
-{
-    MaxElQ(*Q) = Nil;
-	free((*Q).K);
-	free((*Q).J);
-}
+
 /* *** Primitif Add/Delete *** */
 void AddQueue (Queue * Q, jumlah J, kesabaran K)
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
@@ -103,51 +86,36 @@ void DelQueue (Queue * Q, addressQ * P, jumlah * J, kesabaran * K)
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 {
-    Queue Qt;
-    Qt = *Q;
-	*J=jumlahHead(Qt);
-	*K=kesabaranHead(Qt);
-	*P=Head(Qt);
-	
-    if (NBElmtQueue(Qt) == 1)
-    {
-        Head(Qt) = Nil;
-        Tail(Qt) = Nil;
+    *P = Head(*Q);
+    *J = jumlahHead(*Q);
+    *K = kesabaranHead(*Q);
+    if(Head(*Q)!=Tail(*Q)){
+        Head(*Q) = (Head(*Q)%MaxElQ(*Q)) + 1;
+    }else{
+        Head(*Q) = Nil;
+        Tail(*Q) = Nil;
     }
-    else
-    {
-        if (Head(Qt) == MaxElQ(Qt))
-        {
-            Head(Qt) = 1;
-        }
-        else
-        {
-            Head(Qt)++;
-        }
-    }
-    *Q = Qt;
 }
 
 void PrintQueue(Queue Q)
 /* I.S. Q sembarang */
 /* Isi queue dicetak ke layar */
 {	
+
 	addressQ p;
-    iint j; int k; int i; 
+    int j; int k; int i; 
     if(IsEmptyQueue(Q))
     {
 		printf("_\n");
 	}
     else
     {
-		while (!IsEmptyQueue(Q))
-		{
-			DelQueue(&Q,&p,&j,&k);
-			printf("%d\n",j);
-		}
+		for(i=Head(Q);i<=Tail(Q);i++){
+            printf("%d\n",Q.J[i]);
+        }
 	}
 }
-addressQ Search(Queue Q, int jumlah)
+addressQ SearchQ(Queue Q, int jumlah)
 {	
 	int j,k;
 	boolean found;
@@ -196,3 +164,28 @@ void CopyQueue (Queue Qin, Queue *Qout)
 		AddQueue(Qout, J, K);
 	}
 }
+void DealokasiQueue(Queue *Q){
+    MaxElQ(*Q) = Nil;
+    kesabaranTail(*Q) = 0;
+    jumlahTail(*Q) = 0;
+}
+/*
+int main(){
+    int j,k;
+    Queue test;
+    CreateEmptyQueue(&test,100);
+    do{
+        printf("j = " );
+        scanf("%d",&j);
+        printf("k = " );
+        scanf("%d",&k);
+        AddQueue(&test,j,k);
+        printf("queue saat ini :\n");
+        PrintQueue(test);
+        printf("head queue jumlah = ");
+        printf("%d\n",Head(test));
+
+    }while(j!=0);
+    return 0;
+}
+*/

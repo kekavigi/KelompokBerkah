@@ -17,8 +17,8 @@ typedef int addressQ;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct {   
-				 jumlah * J;
-				 kesabaran * K;
+				 jumlah J[50];
+				 kesabaran K[50];
                  addressQ HEAD;  /* alamat penghapusan */
                  addressQ TAIL;  /* alamat penambahan */
                  int MaxElQ;     /* Max elemen queue */
@@ -55,11 +55,7 @@ void CreateEmptyQueue (Queue * Q, int Max);
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
-/* *** Destruktor *** */
-void DealokasiQueue(Queue * Q);
-/* Proses: Mengembalikan memori Q */
-/* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
+void DealokasiQueue(Queue *Q);
 
 /* *** Primitif Add/Delete *** */
 void AddQueue (Queue * Q, jumlah J, kesabaran K);
@@ -77,7 +73,7 @@ void PrintQueue(Queue Q);
 /* Isi queue dicetak ke layar */
 /* mendelete elemen sampai habis dan menuliskan semuanya ke layar */
 
-addressQ Search(Queue Q, int jumlah);
+addressQ SearchQ(Queue Q, int jumlah);
 
 Queue DeleteP(Queue Q, addressQ P);
 
