@@ -1,5 +1,6 @@
 #include "peta.h"
 #include "player.h"
+#include "duduk.h"
 #include "move.h"
 #include <string.h>
 #include <stdio.h>
@@ -88,10 +89,10 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 // akan menjadikan semua state kursi penuh menjadi kursi kosong
 // I.S : sisi left, down, right, dan up meja terdefinisi
 // F.S : jelas
-	if (ElmtMat(*M,UP(meja))==KPENUH) ElmtMat(*M,UP(meja))=KKOSONG;
-	if (ElmtMat(*M,LEFT(meja))==KPENUH) ElmtMat(*M,LEFT(meja))=KKOSONG;
-	if (ElmtMat(*M,DOWN(meja))==KPENUH) ElmtMat(*M,DOWN(meja))=KKOSONG;
-	if (ElmtMat(*M,RIGHT(meja))==KPENUH) ElmtMat(*M,RIGHT(meja))=KKOSONG;
+	if (ElmtMat(*M,FUP(meja))==KPENUH)    ElmtMat(*M,FUP(meja))=KKOSONG;
+	if (ElmtMat(*M,FLEFT(meja))==KPENUH)  ElmtMat(*M,FLEFT(meja))=KKOSONG;
+	if (ElmtMat(*M,FDOWN(meja))==KPENUH)  ElmtMat(*M,FDOWN(meja))=KKOSONG;
+	if (ElmtMat(*M,FRIGHT(meja))==KPENUH) ElmtMat(*M,FRIGHT(meja))=KKOSONG;
 }
 
 void UpdatePETA(PETA *peta, int X){
@@ -119,6 +120,28 @@ void UpdatePETA(PETA *peta, int X){
 	//kalau sudah update room peta, atau ngga ubah room peta, tinggal
 	Pos(*peta) = Posisi(P);
 };
+
+void UpdatePelangganPETA(PETA *peta, NoMeja meja){
+	// mengubah menjadi peta yang baru akibat kesabaran pelanggan
+	//well, setiap room non-dapur punya empat meja, anggap
+	POINT noA = MakePOINT(2,7);
+	POINT noB = MakePOINT(7,7);
+	POINT noC = MakePOINT(2,2);
+	POINT noD = MakePOINT(7,2);
+	// dan  so.. ini kode ugly bats dah
+	if (!Avail(meja,1)  && !Sabar(meja,1))  JadikanKursiKosong(&Mat(Ruang1), noA);
+	if (!Avail(meja,2)  && !Sabar(meja,2))  JadikanKursiKosong(&Mat(Ruang1), noB);
+	if (!Avail(meja,3)  && !Sabar(meja,3))  JadikanKursiKosong(&Mat(Ruang1), noC);
+	if (!Avail(meja,4)  && !Sabar(meja,4))  JadikanKursiKosong(&Mat(Ruang1), noD);
+	if (!Avail(meja,5)  && !Sabar(meja,5))  JadikanKursiKosong(&Mat(Ruang2), noA);
+	if (!Avail(meja,6)  && !Sabar(meja,6))  JadikanKursiKosong(&Mat(Ruang2), noB);
+	if (!Avail(meja,7)  && !Sabar(meja,7))  JadikanKursiKosong(&Mat(Ruang2), noC);
+	if (!Avail(meja,8)  && !Sabar(meja,8))  JadikanKursiKosong(&Mat(Ruang2), noD);
+	if (!Avail(meja,9)  && !Sabar(meja,9))  JadikanKursiKosong(&Mat(Ruang3), noA);
+	if (!Avail(meja,10) && !Sabar(meja,10)) JadikanKursiKosong(&Mat(Ruang3), noB);
+	if (!Avail(meja,11) && !Sabar(meja,11)) JadikanKursiKosong(&Mat(Ruang3), noC);
+	if (!Avail(meja,12) && !Sabar(meja,12)) JadikanKursiKosong(&Mat(Ruang3), noD);
+}
 
 void TulisPETA(PETA peta){
 // mencetak peta ke layar

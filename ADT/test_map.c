@@ -30,15 +30,11 @@ int main(){
 												TulisPETA(RuangAktif);
 												UPDATE_POSISI_PLAYER(&Human, XX, &room);}
 			else if 	(XX<10) printf("not mai task\n");
-			else if 	(XX==10){printf("iyess\n");
-												IsKursiMejaAda(Human, Rum(RuangAktif), &benda, &pbenda);
+			else if 	(XX==10){IsKursiMejaAda(Human, Rum(RuangAktif), &benda, &pbenda);
 												printf("%d\n", benda);
 												if ((benda==1)||(benda==2)){
-													printf("ikehh!!\n");
 													CariMeja(pbenda, benda, Rum(RuangAktif), &pmeja, &nomor_meja, &kmeja);
 													TulisPOINT(pmeja);printf("\n");
-													//printf("%d\n", CountObjek(Mat(RuangAktif), pmeja, 'C'));
-													//printf("%d\n", CountObjek(Mat(RuangAktif), pmeja, 'X'));
 													IsiKursiKosong(&Mat(RuangAktif), pmeja, 2);
 												UpdatePETA(&RuangAktif, XX);
 												TulisPETA(RuangAktif);}

@@ -6,9 +6,7 @@
 
 #define Mat(peta) (peta).mat
 #define Pos(peta) (peta).pos
-#define StatMeja(peta) (peta).statmej
-#define Wadah(peta) (peta).wadah
-#define Rum(peta) (peta).room
+#define Stat(peta) (peta).statmej
 /* objek non-player di peta */
 #define UBIN    '_'
 #define KKOSONG 'C'
@@ -19,11 +17,16 @@ typedef struct {
 	MATRIKS mat;    /* berisi karakter karakter yang bakal di print */
 	POINT pos;			/* posisi player */
 	int room;				/* nomor room */
-	TabInt statmej; /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
-	TabInt wadah; 	/* nomor nampan */
+	TabInt stat; /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
 } PETA;
 
 PETA Ruang1, Ruang2, Ruang3, Dapur, RuangAktif;
+
+//karena malas naruh di point.h
+POINT FLEFT (POINT P);
+POINT FUP (POINT P);
+POINT FDOWN (POINT P);
+POINT FRIGHT (POINT P);
 
 void MakePETA(PETA *peta, char *namafile, int room, POINT pos);
 // membentuk sebuah peta ruangan, pokoke lengkap cuk!
@@ -52,6 +55,8 @@ void JadikanKursiKosong(MATRIKS *M, POINT P);
 void UpdatePETA(PETA *peta, int X);
 // mengubah menjadi peta yang baru akibat gerakan X
 
+void UpdatePelangganPETA(PETA *peta, NoMeja daftarpelanggan);
+// mengubah menjadi peta yang baru akibat kesabaran pelanggan
 
 void TulisPETA(PETA peta);
 // mencetak peta ke layar
