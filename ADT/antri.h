@@ -38,4 +38,7 @@ void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabar
 void GeneratePelanggan (Queue *Q);
 // Buat generate pelanggan
 
+void DelAntriSabar (Queue *Q, PLAYER *P);
+// menghapus pelanggan duduk, sabar habis
+
 #endif
