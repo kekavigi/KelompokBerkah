@@ -243,7 +243,7 @@ int main (){
 				JADV(&GAME_CLOCK); // JAM BERTAMBAH
 			} else if (COMMAND == 11){ //GIVE
 				nm = CekNomorMeja (Pnm, CURRENT_ROOM); //ngambil nomor meja
-				if (cekPesananMeja(DaftarPesanan, Pesan(N,nm), nm))
+				if (Top(Nampan) == Pesan(N,nm))
 				{
 					DelDuduk (&N,nm);
 					if (Pesan(N,nm) == 17) //Nambahin duit dikali jumlah pelanggan
