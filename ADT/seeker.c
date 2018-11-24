@@ -306,6 +306,5 @@ int main(){
 		printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
 	}while(command != 6);
 */
-
 	return 0;
 }
