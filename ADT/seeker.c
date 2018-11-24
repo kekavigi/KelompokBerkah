@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "seeker.h"
+#include "player.c"
+#include "move.c"
+#include "point.c"
 
 void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 // Prosedur untuk memeriksa apakah di sekitar player ada meja, meja racik, kursi, meja tray.
@@ -26,6 +29,7 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			}
 		}
 
@@ -41,6 +45,7 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			}
 		}
 
@@ -56,6 +61,7 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			}
 		}
 
@@ -71,10 +77,12 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			}
 		}
 
 	}else{ // ada di room 1
+		printf("Masuk pak eko\n");
 		seek = Posisi(P);
 		Ordinat(seek) = Ordinat(seek)-1; // Pencarian ke bawah
 		if (IsMejaKursi(seek,CURRENT_ROOM)){
@@ -83,9 +91,11 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 			}else{
 				*BENDA = 2; // ketemu meja racik
 			}
+			*PBENDA = seek;
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			} // gak ketemu apa2
 		}
 
@@ -97,9 +107,11 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 			}else{
 				*BENDA = 2; // ketemu meja racik
 			}
+			*PBENDA = seek;
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			} // gak ketemu apa2
 		}
 
@@ -111,9 +123,11 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 			}else{
 				*BENDA = 2; // ketemu meja racik
 			}
+			*PBENDA = seek;
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			}// gak ketemu apa2
 		}
 
@@ -125,9 +139,11 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 			}else{
 				*BENDA = 2; // ketemu meja racik
 			}
+			*PBENDA = seek;
 		}else{
 			if(*BENDA == 0){
 				*BENDA = 0;
+				*PBENDA = Posisi(P);
 			} // gak ketemu apa2
 		}
 	}
@@ -217,45 +233,79 @@ int HitungKursi(int NOMOR_MEJA){
 int CekMejaRacik(POINT P){
 // HANYA DIPAKAI KETIKA INT BENDA = 2
 // Akan mengirimkan bahan yang tersedia
+	if((Absis(P) == 1 && Ordinat(P) == 1)){
+		return 1; // piring
+	}else if((Absis(P) == 1) && (Ordinat(P) == 2)){
+		return 2; //sendok
+	}else if((Absis(P) == 1) && (Ordinat(P) == 3)){
+		return 3; //garpu
+	}else if((Absis(P) == 1) && (Ordinat(P) == 4)){
+		return 4; // Es krim
+	}else if((Absis(P) == 1) && (Ordinat(P) == 5)){
+		return 5; //Nasi
+	}else if((Absis(P) == 1) && (Ordinat(P) == 6)){
+		return 6; //Roti
+	}else if((Absis(P) == 1) && (Ordinat(P) == 7)){
+		return 7; //Spagheti
+	}else if((Absis(P) == 1) && (Ordinat(P) == 8)){
+		return 8; //Pisang
+	}else if((Absis(P) == 4) && (Ordinat(P) == 1)){
+		return 9; // Stroberi
+	}else if((Absis(P) == 5) && (Ordinat(P) == 1)){
+		return 10; // Telur
+	}else if((Absis(P) == 6) && (Ordinat(P) == 1)){
+		return 11; // Ayam Goreng
+	}else if((Absis(P) == 7) && (Ordinat(P) == 1)){
+		return 12; // Patty
+	}else if((Absis(P) == 8) && (Ordinat(P) == 1)){
+		return 13; // Sosis
+	}else if((Absis(P) == 4) && (Ordinat(P) == 4)){
+		return 14; // Bolognese
+	}else if((Absis(P) == 5) && (Ordinat(P) == 4)){
+		return 15; // Carbonara
+	}else if((Absis(P) == 6) && (Ordinat(P) == 4)){
+		return 16; // Keju
+	}else{
+		return 0; //Kosong
+	}
 }
 
-boolean CekMejaTray(PLAYER P){
+boolean CekMejaTray(POINT P){
 // Mengecek apakah ada meja tray di sekitar player
+	return ((Absis(P) == 8) && (Ordinat(P) == 8));
 }
 
-/*
-int main(){
 
-	PLAYER P1;
-	int room;
-	int command;
-	int benda,NOMOR_MEJA,KMEJA;
-	POINT seek,PMEJA;
+//int main(){
+//	PLAYER P1;
+//	int room;
+//	int command;
+//	int benda,NOMOR_MEJA,KMEJA;
+//	POINT seek,PMEJA;
+//	START_PLAYER(&P1);
+//	room = 1;
+//	printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
+//	do{
+//		scanf("%d",&command);
+//		system("cls");
+//		if(command != 5){
+//			UPDATE_POSISI_PLAYER(&P1,command,&room);
+//		}else{
+//			IsKursiMejaAda(P1,room,&benda,&seek);
+//			printf("[%d,%d]",Absis(seek), Ordinat(seek));
+//			if (benda == 2 || benda == 1){
+//				NOMOR_MEJA = CekMejaRacik(seek);
+//				printf("Di sekitar player ada meja RACIK yang bernomor %d.\n",NOMOR_MEJA);
+//			}else{
+//				printf("gak ada apa2 disekitar player\n");
+//			}
+//			
+//			if(CekMejaTray(seek)){
+//				printf("Disini bisa masak makanan\n");
+//			}
+//		}
+//		printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
+//	}while(command != 6);
+//	return 0;
+//}
 
-	START_PLAYER(&P1);
-	room = 1;
-
-	printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
-
-	do{
-		scanf("%d",&command);
-		system("cls");
-
-		if(command != 5){
-			UPDATE_POSISI_PLAYER(&P1,command,&room);
-		}else{
-			IsKursiMejaAda(P1,room,&benda,&seek);
-			if (benda == 1 || benda == 2){
-				CariMeja(seek, benda, room, &PMEJA, &NOMOR_MEJA, &KMEJA);
-				printf("Di sekitar player ada meja yang bernomor %d, dan kapasitasnya adalah %d.\n",NOMOR_MEJA,KMEJA);
-			}else{
-				printf("gak ada apa2 disekitar player\n");
-			}
-		}
-
-		printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
-	}while(command != 6);
-
-	return 0;
-}
-*/
