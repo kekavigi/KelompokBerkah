@@ -1,32 +1,42 @@
-#define IdxMax 100
+#ifndef PETA_H
+#define PETA_H
+
+#include "boolean.h"
+
+#define IdxMaxPesanan 100
+
 /* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
-#define IdxMin 1
+#define IdxMinPesanan 1
 /* Indeks minimum array */
-#define IdxUndef -999 
+#define IdxUndefPesanan -999 
 /* Indeks tak terdefinisi*/
 
 typedef int ElType; /* type indeks */
 typedef int IdxType;  /* type elemen tabel */
 
 typedef struct { 
-	ElType TI[IdxMax+1]; /* memori tempat penyimpan elemen (container) */
-	int Number; /* >=0, banyaknya elemen efektif */
+	ElType TI[IdxMaxPesanan+1]; /* memori tempat penyimpan elemen (container) */
+	int Number[IdxMaxPesanan+1]; 
 	int Neff;
 } Pesanan; 
 
 #define Neff(T)   (T).Neff
-#define Number(T)   (T).Number
+#define Number(T,i)   (T).Number[(i)]
 #define TI(T)     (T).TI
 #define Elmt(T,i) (T).TI[(i)]
 
-int NbElmtP (Pesanan T);
+boolean IsEmptyPesanan(Pesanan T);
 
-IdxType SearchIdxP (Pesanan T, ElType X);
+int NbElmtPesanan (Pesanan T);
 
-void delPesanan(Pesanan *DaftarPesanan,ElType pesanan);
+IdxType SearchIdxP (Pesanan T, ElType X, int N);
 
-void DelElmtP(Pesanan * T, ElType X);
+void delPesanan(Pesanan *DaftarPesanan,ElType pesanan, int N);
 
-void AddElmtP(Pesanan * T, ElType X);
+void DelElmtP(Pesanan * T, ElType X, int N);
 
-void addPesanan(ElType pesanan,Pesanan *DaftarPesanan);
+void AddElmtP(Pesanan * T, ElType X, int N);
+
+void addPesanan(Pesanan *DaftarPesanan, ElType pesanan, int N );
+
+#endif
