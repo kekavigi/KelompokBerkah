@@ -1,9 +1,9 @@
 #include "bintree.h"
-#include "mesinkar.c"
-#include "datatype.c"
+#include "mesinkar.h"
+#include "dataresep.h"
 #include "stackt.h"
-/***********************ADT POHON BINER********************************/
-/*** Konstruktor ***/
+
+
 void Allocate (paddress *P)
 {
 	*P =(paddress) malloc(sizeof(node));

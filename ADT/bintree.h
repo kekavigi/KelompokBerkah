@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "mesinkar.h"
 #include "boolean.h"
-#include "datatype.h"
+#include "dataresep.h"
 
 #define NilTree NULL
 
@@ -89,16 +89,13 @@ void PrintPostorder (BinTree P);
 //akar. Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
 void ShowBranch (BinTree P);
 /*Menunjukkan cabang resep yang tersedia */
-void PrintBranch(int h);
+void PrintBranch(int h, int * ArrSlash);
 /* Fungsi Pembantu PrintTree() */
 /* Menunjukkan alur dari semua cabang pohon biner */
 void PrintTree (BinTree P, int dh, int hc, int * ArrSlash);
 //I.S. P terdefinisi, h adalah jarak indentasi
 //F.S. Semua simpul P sudah ditulis dengan indentasi
 /*** Searching ***/
-
-//BinTree SearchPBCode (BinTree P, int X);
-/* Mencari dan mengembalikan nilai alamat akar tempat X ditemukan dalam P */
 
 BinTree isNextRoot (BinTree P, int X);
 /* Mengecek apakah X adalah anak akar dari BinTree P */
