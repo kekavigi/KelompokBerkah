@@ -3,9 +3,9 @@
 	Wanul                     */
 	
 #include <stdio.h>
+#include <stdlib.h>
 #include "antri.h"
-#include "player.h"
-#include "jam.h"
+#include "duduk.h"
 
 void SetEmptyAntri (Queue *Q, int Max)
 //I.S. Sembarang
@@ -35,6 +35,7 @@ boolean CekSabarAntri (Queue Q)
 {
 	boolean abis = false;
 	int j, k;
+	addressQ P;
 	if (IsEmptyQueue(Q))
 	{
 		return (abis);
@@ -65,7 +66,7 @@ void UpdateSabarAntri (Queue *Q)
 	while (!IsEmptyQueue(QTemp1))
 	{
 		kesabaranHead(Q) = kesabaranHead(Q) - 1;
-		DelQueue(&Qin, &P, &J, &K);
+		DelQueue(&QTemp1, &P, &J, &K);
 		AddQueue(&QTemp2, J, K);
 	}
 	CopyQueue (QTemp2, Q);
@@ -73,7 +74,7 @@ void UpdateSabarAntri (Queue *Q)
 	DealokasiQueue (&QTemp2);
 }
 
-void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabaran *K);
+void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabaran *K)
 //	Ini sama persis kayak DelCust, cuma nyawanya gak ngurang dan ditempatin di meja tertentu. X nomor meja yang dituju
 //	Langsung diisi informasi buat meja yang dipake di duduk.h
 {
@@ -81,8 +82,8 @@ void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabar
 	{
 		Avail(N,X) = false;
 		Isi(N,X) = jumlahHead(*Q);
-		Sabar(N,X) = J_DUDUK();
-		Pesan(N,X) = rand() % (8 + 1 - 1) + 1;
+		J_DUDUK(&Sabar(N,X));
+		Pesan(N,X) = rand() % (24 + 1 - 17) + 17;
 		DelQueue (Q, P, J, K);
 	}
 	else
@@ -94,7 +95,9 @@ void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabar
 void GeneratePelanggan (Queue *Q)
 // Buat generate pelanggan
 {
+	JAM K;
+	int J; // jumlah pengunjung
 	J = rand() % (4 + 1 - 1) + 1;
-	K = J_ANTRI();
+	J_ANTRI(&K);
 	AddQueue (Q,J,K);
 }
