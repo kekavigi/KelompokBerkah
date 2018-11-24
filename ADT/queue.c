@@ -74,7 +74,7 @@ void AddQueue (Queue * Q, jumlah J, kesabaran K)
         {
             Tail(*Q)++;
         }
-        jumlahHead(*Q) = J;
+        jumlahTail(*Q) = J;
         kesabaranTail(*Q) = K;
     }
 
@@ -182,9 +182,8 @@ int main(){
         AddQueue(&test,j,k);
         printf("queue saat ini :\n");
         PrintQueue(test);
-        printf("head queue jumlah = ");
-        printf("%d\n",Head(test));
-
+        //printf("head queue jumlah = ");
+        //printf("%d\n",Head(test));
     }while(j!=0);
     return 0;
 }
