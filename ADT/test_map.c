@@ -3,6 +3,7 @@
 #include "seeker.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(){
 	//inisialisasi
@@ -22,6 +23,7 @@ int main(){
 	POINT pbenda, pmeja;
 
 	while (running){
+			system("cls");
 			printf(">> ");
 			scanf("%d", &XX);
 			if 				(XX<1)  running = false;
@@ -39,7 +41,8 @@ int main(){
 												UpdatePETA(&RuangAktif, XX);
 												TulisPETA(RuangAktif);}
 		  else printf("cot");
-			printf("\n");
+			scanf("%d",&XX);
+			system("cls");
 	};
 
 	return 0;
