@@ -30,8 +30,8 @@ boolean CekCommandValid (Kata K);
 // Menghasilkan true kalo commandnya benar
 void BACA_COMMAND (int *COMMAND);
 // Prosedur ini buat translate masukan dari pengguna, dari string ke integer
-void GENERATE_PELANGGAN (GAME_CLOCK G, Queue *Q);
-// Prosedur ini buat generate pelanggan setiap G kelipatan 15
+void GENERATE_PELANGGAN (JAM J, Queue *Q);
+// Prosedur ini buat generate pelanggan setiap J kelipatan 15
 void PRINT_CREDIT();
 
 int main (){
@@ -175,7 +175,7 @@ int main (){
 	}
 	
 	
-	GENERATE_PELANGGAN (GAME_CLOCK); // KALO JAMNYA MERUPAKAN KELIPATAN 15, AKAN MENAMBAH 1 PELANGGAN
+	GENERATE_PELANGGAN (GAME_CLOCK, &Q); // KALO JAMNYA MERUPAKAN KELIPATAN 15, AKAN MENAMBAH 1 PELANGGAN
 	UpdateSabarAntri (&Q); // MENGURANGI 1 WAKTU TUNGGU TIAP PELANGGAN DI ANTRIAN
 	UpdateKesabaranDuduk (&N); // MENGURANGI 1 WAKTU TUNGGU TIAP PELANGGAN YANG SUDAH DUDUK
 	UPDATE_MAP();
@@ -283,9 +283,9 @@ void BACA_COMMAND (int *COMMAND)
 	}
 }
 
-void GENERATE_PELANGGAN (GAME_CLOCK G, Queue *Q)
+void GENERATE_PELANGGAN (JAM J, Queue *Q)
 {
-	if (G%15 == 0)
+	if (J%15 == 0)
 	{
 		GeneratePelanggan (Q);
 	}
