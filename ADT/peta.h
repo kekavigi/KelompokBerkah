@@ -20,9 +20,10 @@ typedef struct {
 	TabInt stat; /* anggap indeks meja sebagai nomor meja, setiap indeks berisi banyak kursi yang penuh */
 } PETA;
 
+// Variabel Global
 PETA Ruang1, Ruang2, Ruang3, Dapur, RuangAktif;
 
-//karena malas naruh di point.h
+// Pendefinisian LEFT, UP, DOWN, RIGHT.
 POINT FLEFT (POINT P);
 POINT FUP (POINT P);
 POINT FDOWN (POINT P);
@@ -39,7 +40,7 @@ POINT FindMeja(MATRIKS M, POINT P);
 				...*/
 
 int CountObjek(MATRIKS M, POINT P, char objek);
-// akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right player;
+// akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right point P;
 
 void IsiKursiKosong(MATRIKS *M, POINT meja, int minta);
 // akan mengubah state kursi kosong ke kursi penuh sebanyak minta
