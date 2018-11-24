@@ -1,4 +1,10 @@
+#ifndef PETA_H
+#define PETA_H
+
+#include "boolean.h"
+
 #define IdxMax 100
+
 /* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
 #define IdxMin 1
 /* Indeks minimum array */
@@ -30,3 +36,7 @@ void DelElmtP(Pesanan * T, ElType X);
 void AddElmtP(Pesanan * T, ElType X);
 
 void addPesanan(ElType pesanan,Pesanan *DaftarPesanan);
+
+boolean cekPesananMeja(Pesanan DaftarPesanan, int P,int N);
+
+#endif
