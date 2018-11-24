@@ -1,4 +1,5 @@
 #include "stackt.h"
+#include "dataresep.h"
 #include <stdio.h>
 #include <stdlib.h>
 

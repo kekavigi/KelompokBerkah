@@ -10,3 +10,5 @@ void CT(Stack *Nampan);
 void TAKE(Stack *Hand,infotypeStackt bahan);
 void ShowRecipe (BinTree P);
 void PUT (BinTree  P, Stack *Bahan,Stack *Food);
+
+#endif

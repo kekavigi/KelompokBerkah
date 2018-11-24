@@ -1,0 +1,1 @@
+gcc -o test game.c move.c jam.c point.c player.c dataresep.c bintree.c mesinkata.c mesinkar.c komplitstack.c array.c stackt.c

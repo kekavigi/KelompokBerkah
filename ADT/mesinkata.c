@@ -1,4 +1,5 @@
 #include "mesinkata.h"
+#include <stdio.h>
 
 /* State Mesin Kata */
 boolean EndKata;

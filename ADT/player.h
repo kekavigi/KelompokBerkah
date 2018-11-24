@@ -1,4 +1,4 @@
-/*
+/* 
 ADT PLAYER Untuk TUBES
 dibuat oleh Fio
 tanggal 18/11/2018
@@ -11,10 +11,10 @@ revisi 1
 #include "boolean.h"
 #include "point.h"
 
-typedef struct {
+typedef struct { 
 	int Life; /* Nyawa Player   */
 	int Money; /* Uang Player */
-	POINT Posisi; /* Posisi Player */
+	POINT Posisi; /* Posisi Player */ 
 } PLAYER;
 
 /* *** Notasi Akses: Selektor PLAYER *** */
@@ -40,3 +40,4 @@ void UPDATE_LIFE(PLAYER *P);
 // Mengurangi Life player (Health dikurangi 1 karena ada pelanggan yang meninggalkan restoran atau antrian)
 
 #endif
+

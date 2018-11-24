@@ -14,28 +14,26 @@
 // void RIGHT1 (POINT *P, int *room_sekarang);
 
 /* Ini Driver buat mengetes */
-/*
- int main(){
- 	PLAYER P1;
- 	int room;
- 	int command;
+// int main(){
+// 	PLAYER P1;
+// 	int room;
+// 	int command;
 
- 	START_PLAYER(&P1);
- 	room = 1;
+// 	START_PLAYER(&P1);
+// 	room = 1;
 
- 	printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
+// 	printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
 
- 	do{
- 		scanf("%d",&command);
+// 	do{
+// 		scanf("%d",&command);
 
- 		UPDATE_POSISI_PLAYER(&P1,command,&room);
+// 		UPDATE_POSISI_PLAYER(&P1,command,&room);
 
- 		printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
- 	}while(command != 5);
+// 		printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",room,Absis(Posisi(P1)),Ordinat(Posisi(P1)));
+// 	}while(command != 5);
 
- 	return 0;
- }
-*/
+// 	return 0;
+// }
 
 void UPDATE_POSISI_PLAYER(PLAYER *P, int X, int *room){
 /* MEMPERBAHARUI POSISI PLAYER DALAM GAME */

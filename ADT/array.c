@@ -1,6 +1,8 @@
 #include "array.h"
 #include "stackt.h"
 #include "boolean.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */

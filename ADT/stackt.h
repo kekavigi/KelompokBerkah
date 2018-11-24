@@ -6,7 +6,6 @@
 #define stackt_H
 
 #include "boolean.h"
-#include "datatype.h"
 
 #define Nil 0
 #define MaxElStackt 100

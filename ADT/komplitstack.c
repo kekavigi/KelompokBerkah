@@ -1,7 +1,6 @@
-#include "stackt.c"
 #include "stackt.h"
 #include "array.h"
-#include "bintree.c"
+#include "bintree.h"
 
 Stack Hand;
 Stack Nampan;
@@ -34,7 +33,7 @@ void ShowRecipe (BinTree P)
 }
 
 
-void Put (BinTree  P, Stack *Bahan,Stack *Food)
+void PUT (BinTree  P, Stack *Bahan,Stack *Food)
 {
   //Kamus
   Stack SLoop, SIn, SOut, SExtra,FoodExtra;
@@ -100,30 +99,3 @@ void Put (BinTree  P, Stack *Bahan,Stack *Food)
   } 
 }
 //int CekRacikan(Stack *Hand);
-
-//coba coba
-int main(){
-  //Kamus
-  BinTree Resep;
-  Stack Hand,Food;
-  infotypeStackt input;
-  //Algoritma
-  CreateEmptyStackt(&Hand);
-  CreateEmptyStackt(&Food);
-  LoadRecipe(&Resep);
-  //ShowRecipe(Resep);
-  puts("Masukan kode bahan : ");
-  scanf("%d",&input);
-  while(input != 0){
-    Push(&Hand,input);
-    scanf("%d",&input);
-  }
-  printf("Stack Hand sebelum\n");
-  PrintStackt(Hand);
-  Put(Resep, &Hand, &Food);
-  printf("Stack Hand sesudah\n");
-  PrintStackt(Hand);
-  printf("Stack Food\n");
-  PrintStackt(Food);
-  return 0;
-}
