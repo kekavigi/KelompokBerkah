@@ -101,3 +101,20 @@ void GeneratePelanggan (Queue *Q)
 	J_ANTRI(&K);
 	AddQueue (Q,J,K);
 }
+
+void DelAntriSabar (Queue *Q, PLAYER *P)
+// menghapus pelanggan duduk, sabar habis
+{
+	addressQ i;
+	Queue Qtemp;
+	int i;
+	if(!IsEmptyQueue(*Q)){
+		for(i=Head(*Q);i<=Tail(*Q);i++){
+			if(Q.K[i]==0){
+				Qtemp=DeleteP(Q,i);
+				UPDATE_LIFE(P);
+			}
+		}
+	}
+	*Q=Qtemp;
+}
