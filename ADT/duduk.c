@@ -33,10 +33,11 @@ int CekKapasitas (NoMeja N, int X)
 	return (Cap(N,X));
 }
 
-void DelDuduk (NoMeja *N, int X)
+void DelDuduk (Pesanan *DaftarPesanan, NoMeja *N, int X)
 /*	I.S. X diasumsikan benar. Tempat duduk tidak kosong
 	F.S. Tempat duduk di meja N kosong */
 {
+	delPesanan (DaftarPesanan, Pesan(*N,X), X);
 	Isi(*N,X) = 0;
 	Avail(*N,X) = true;
 	Sabar(*N,X) = UndDuduk;
@@ -74,7 +75,7 @@ void UpdateKesabaranDuduk (NoMeja *N)
 	}
 }
 
-void DelSabarDuduk (NoMeja *N, PLAYER *P)
+void DelSabarDuduk (Pesanan *DaftarPesanan, NoMeja *N, PLAYER *P)
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
 {
 	int i = 1;
@@ -84,6 +85,7 @@ void DelSabarDuduk (NoMeja *N, PLAYER *P)
 		{
 			if (Sabar(*N,i) == Habis)
 			{
+				delPesanan (DaftarPesanan, Pesan(*N,i), i);
 				Isi(*N,i) = 0;
 				Avail(*N,i) = true;
 				Sabar(*N,i) = UndDuduk;
@@ -116,7 +118,11 @@ void IsiCap (NoMeja *N)
 		i = i + 1;
 	}
 }
-int main ()
+
+/*int main ()
 {
+	NoMeja N;
+	SetEmptyDuduk (&N);
+	printf ("%d\n", Isi(N,2));
 	return 0;
-}
+}*/
