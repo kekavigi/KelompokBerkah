@@ -340,55 +340,55 @@ void BACA_COMMAND (int *COMMAND)
 		}
 		while (!CekCommandValid(K));
 	}
-	if (IsKataSama(K,GU)
+	if (IsKataSama(K,GU))
 	{
 		*COMMAND = 1;
 	}
-	else if (IsKataSama(K,GD)
+	else if (IsKataSama(K,GD))
 	{
 		*COMMAND = 2;
 	}
-	else if (IsKataSama(K,GL)
+	else if (IsKataSama(K,GL))
 	{
 		*COMMAND = 3;
 	}
-	else if (IsKataSama(K,GR)
+	else if (IsKataSama(K,GR))
 	{
 		*COMMAND = 4;
 	}
-	else if (IsKataSama(K,OR)
+	else if (IsKataSama(K,OR))
 	{
 		*COMMAND = 5;
 	}
-	else if (IsKataSama(K,PT)
+	else if (IsKataSama(K,PT))
 	{
 		*COMMAND = 6;
 	}
-	else if (IsKataSama(K,TK)
+	else if (IsKataSama(K,TK))
 	{
 		*COMMAND = 7;
 	}
-	else if (IsKataSama(K,CH)
+	else if (IsKataSama(K,CH))
 	{
 		*COMMAND = 8;
 	}
-	else if (IsKataSama(K,CT)
+	else if (IsKataSama(K,CT))
 	{
 		*COMMAND = 9;
 	}
-	else if (IsKataSama(K,PL)
+	else if (IsKataSama(K,PL))
 	{
 		*COMMAND = 10;
 	}
-	else if (IsKataSama(K,GV)
+	else if (IsKataSama(K,GV))
 	{
 		*COMMAND = 11;
 	}
-	else if (IsKataSama(K,RC)
+	else if (IsKataSama(K,RC))
 	{
 		*COMMAND = 12;
 	}
-	else if (IsKataSama(K,EX)
+	else if (IsKataSama(K,EX))
 	{
 		*COMMAND = 13;
 	}
