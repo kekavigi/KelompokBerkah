@@ -30,8 +30,8 @@ void DelCust (PLAYER *P1, Queue *Q, addressQ *P, jumlah *J, kesabaran *K)
 }
 
 boolean CekSabarAntri (Queue Q)
-/*	Ngecek apakah di Queue antrian udah ada yang abis kesabarannya
-	Kalo ada yang abis keluarannya true */
+//	Ngecek apakah di Queue antrian udah ada yang abis kesabarannya
+//	Kalo ada yang abis keluarannya true
 {
 	boolean abis = false;
 	int j, k;
@@ -55,7 +55,7 @@ boolean CekSabarAntri (Queue Q)
 }
 
 void UpdateSabarAntri (Queue *Q)
-/*	Setiap langkah yang player lakukan, bakal ngurangin sabar setiap yang antri */
+//	Setiap langkah yang player lakukan, bakal ngurangin sabar setiap yang antri
 // I.S. Asumsi gak ada yang kesabarannya 0
 {
 	Queue QTemp1, QTemp2;
@@ -65,7 +65,7 @@ void UpdateSabarAntri (Queue *Q)
 	CopyQueue (*Q, &QTemp1);
 	while (!IsEmptyQueue(QTemp1))
 	{
-		kesabaranHead(Q) = kesabaranHead(Q) - 1;
+		kesabaranHead(*Q) = kesabaranHead(*Q) - 1;
 		DelQueue(&QTemp1, &P, &J, &K);
 		AddQueue(&QTemp2, J, K);
 	}
@@ -80,10 +80,10 @@ void PlaceCustAntri (NoMeja *N, int X, Queue *Q, addressQ *P, jumlah *J, kesabar
 {
 	if (Cap(*N,X) >= jumlahHead(*Q))
 	{
-		Avail(N,X) = false;
-		Isi(N,X) = jumlahHead(*Q);
-		J_DUDUK(&Sabar(N,X));
-		Pesan(N,X) = rand() % (24 + 1 - 17) + 17;
+		Avail(*N,X) = false;
+		Isi(*N,X) = jumlahHead(*Q);
+		J_DUDUK(&Sabar(*N,X));
+		Pesan(*N,X) = rand() % (24 + 1 - 17) + 17;
 		DelQueue (Q, P, J, K);
 	}
 	else
