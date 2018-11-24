@@ -1,4 +1,5 @@
 #include "peta.h"
+#include "player.h"
 #include "move.h"
 #include <string.h>
 #include <stdio.h>
@@ -64,14 +65,29 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 	if (ElmtMat(*M,RIGHT(meja))==KPENUH) ElmtMat(*M,RIGHT(meja))=KKOSONG;
 }
 
-PETA UpdatePETA(PETA peta, int X){
-// mengirimkan peta yang baru akibat gerakan X
-	POINT P = Posisi(Pos(peta));
-	int room= Rum(peta);
+/*
+void UpdatePETA(PETA *peta, int X){
+	POINT P  = Pos(*peta);
+	int room = Rum(*peta);
 
-	//UPDATE_POSISI_PLAYER()
-
-}
+	UPDATE_POSISI_PLAYER(&P, X, &room);
+	if (room!=Rum(*peta)){
+			//player pindah ruangan, simpan apapun yang terjadi di RuangAktif ke Ruang bersesuaian
+			if 			(Rum(*peta)==1) Ruang1 = *peta;
+			else if (Rum(*peta)==2) Ruang2 = *peta;
+			else if (Rum(*peta)==3) Ruang3 = *peta;
+			else									  Dapur  = *peta;
+			//sekarang update peta
+			if 			(room==1) *peta = Ruang1;
+			else if (room==2) *peta = Ruang2;
+			else if (room==3) *peta = Ruang3;
+			else							*peta = Dapur;
+		};
+		//sekarang update detail peta like
+		Rum(*peta) = room;
+		Pos(*peta) = P;
+};
+*/
 
 void TulisPETA(PETA peta){
 // mencetak peta ke layar

@@ -47,8 +47,9 @@ void JadikanKursiKosong(MATRIKS *M, POINT P);
 // I.S : sisi left, down, right, dan up meja terdefinisi
 // F.S : jelas
 
-void UpdatePETA(PETA peta, int X);
-// mengirimkan peta yang baru akibat gerakan X
+void UpdatePETA(PETA *peta, int X);
+// mengubah menjadi peta yang baru akibat gerakan X
+
 
 void TulisPETA(PETA peta);
 // mencetak peta ke layar

@@ -1,4 +1,4 @@
-/* 
+/*
 ADT PLAYER Untuk TUBES
 dibuat oleh Fio
 tanggal 18/11/2018
@@ -42,7 +42,7 @@ void UPDATE_POSISI(PLAYER *P, int X){
 	}else if (X == 4){
 		Posisi(*P) = RIGHT(Posisi(*P));
 	}
-		
+
 }
 
 void UPDATE_LIFE(PLAYER *P){
