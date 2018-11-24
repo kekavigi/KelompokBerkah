@@ -6,6 +6,7 @@
 #define DUDUK_H
 
 #include "boolean.h"
+#include "player.h"
 /* Definisi bagian duduk */
 
 #define JmlMeja 12
@@ -13,7 +14,7 @@
 #define Habis 0
 
 typedef struct {
-	int Capacity[13] = {0,4,2,4,2,4,2,4,2,4,2,4,2};
+	int Capacity[13];
 	int Isi[13]; //ini menyatakan jumlah yang diisi dari meja
 	boolean Available[13]; 	//ini menyatakan apakah meja udah didudukin apa belum
 						//kalo udah didudukin bernilai false
@@ -50,12 +51,10 @@ int JmlSabarHabis (NoMeja N);
 void UpdateKesabaranDuduk (NoMeja *N);
 // untuk setiap gerakan, per ruangan setiap meja kesabaran kurang 1
 
-/* PlaceCustDuduk () ini gak perlu sama kayak di antri (PlaceCustAntri)*/
-
-/* CekPesanan (); ini gak perlu, soalnya udah ada Pesan(N) */
-
-/* MakeRandomPesanan (); udah tersedia di (PlaceCustAntri) */
 void DelSabarDuduk (NoMeja *N, PLAYER *P);
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
+
+void IsiCap (NoMeja *N);
+// ngisi capacity setiap kursi
 
 #endif
