@@ -7,6 +7,7 @@
 
 #include "boolean.h"
 #include "player.h"
+#include "pesanan.h"
 /* Definisi bagian duduk */
 
 #define JmlMeja 12
@@ -21,7 +22,6 @@ typedef struct {
 	int Kesabaran[13];
 	int Pesanan[13]; // dalam integer, ngurut sesuai urutan di tree
 } NoMeja;
-
 /* Jika N adalah NoMeja, dan i adalah nomor mejanya, maka akses elemen: */
 #define Cap(N,i) (N).Capacity[(i)]
 #define Isi(N,i) (N).Isi[(i)]
@@ -41,7 +41,7 @@ boolean CekKosong (NoMeja N, int X);
 int CekKapasitas (NoMeja N, int X);
 // I.S. X diasumsikan benar
 
-void DelDuduk (NoMeja *N, int X);
+void DelDuduk (Pesanan *DaftarPesanan, NoMeja *N, int X);
 /*	I.S. N diasumsikan benar. Tempat duduk tidak kosong
 	F.S. Tempat duduk di meja N kosong */
 
@@ -51,7 +51,7 @@ int JmlSabarHabis (NoMeja N);
 void UpdateKesabaranDuduk (NoMeja *N);
 // untuk setiap gerakan, per ruangan setiap meja kesabaran kurang 1
 
-void DelSabarDuduk (NoMeja *N, PLAYER *P);
+void DelSabarDuduk (Pesanan *DaftarPesanan, NoMeja *N, PLAYER *P);
 // yang duduk dan kesabaran = 0 dihapus, nyawa kurang 1
 
 void IsiCap (NoMeja *N);
