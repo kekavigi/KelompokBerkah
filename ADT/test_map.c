@@ -27,11 +27,7 @@ int main(){
 			if 				(XX<1)  running = false;
 			else if 	(XX<5) {UpdatePETA(&RuangAktif, XX);
 												TulisPETA(RuangAktif);
-
-												TulisPOINT(Posisi(Human));
-												UPDATE_POSISI_PLAYER(&Human, XX, &room);
-												TulisPOINT(Posisi(Human));}
-
+												UPDATE_POSISI_PLAYER(&Human, XX, &room);}
 			else if 	(XX<10) printf("not mai task\n");
 			else if 	(XX==10){printf("iyess\n");
 												IsKursiMejaAda(Human, Rum(RuangAktif), &benda, &pbenda);
@@ -40,7 +36,8 @@ int main(){
 													printf("ikehh!!\n");
 													CariMeja(Posisi(Human), 2, Rum(RuangAktif), &pmeja, &nomor_meja, &kmeja);
 													IsiKursiKosong(&Mat(RuangAktif), pmeja, 2);};
-												}
+												UpdatePETA(&RuangAktif, XX);
+												TulisPETA(RuangAktif);}
 		  else printf("cot");
 			printf("\n");
 	};

@@ -75,21 +75,18 @@ void UpdatePETA(PETA *peta, int X){
 
 	UPDATE_POSISI_PLAYER(&P, X, &room);
 
-	TulisPOINT(Pos(*peta)); printf("\n");
-	TulisPOINT(Posisi(P)) ; printf("\n");
-
 	if (room!=Rum(*peta)){
 			//player pindah ruangan, simpan apapun yang terjadi di RuangAktif ke Ruang yang bersesuaian
 			//jika awalnya rum1, update rum1...
-			if 			(Rum(*peta)==1) Ruang1 = *peta;
-			else if (Rum(*peta)==2) Ruang2 = *peta;
-			else if (Rum(*peta)==3) Ruang3 = *peta;
-			else									  Dapur  = *peta;
-			//sekarang update peta, jika room=1, fetch data Ruang1
-			if 			(room==1) *peta = Ruang1;
-			else if (room==2) *peta = Ruang2;
-			else if (room==3) *peta = Ruang3;
-			else							*peta = Dapur;
+			if 			(Rum(*peta)==1) Dapur = *peta;
+			else if (Rum(*peta)==2) Ruang1 = *peta;
+			else if (Rum(*peta)==3) Ruang2 = *peta;
+			else									  Ruang3  = *peta;
+			//sekarang update peta, jika room=1, fetch data dapur
+			if 			(room==1) *peta = Dapur;
+			else if (room==2) *peta = Ruang1;
+			else if (room==3) *peta = Ruang2;
+			else							*peta = Ruang3;
 			Rum(*peta) = room;
 	};
 	//kalau sudah update room peta, atau ngga ubah room peta, tinggal
