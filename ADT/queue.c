@@ -46,10 +46,8 @@ void CreateEmptyQueue (Queue * Q, int Max)
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi,Membuat sebuah Q kosong */
 {
-    (*Q).T = (time *) malloc ((Max + 1) * sizeof(time));
-    (*Q).W = (waiting *) malloc ((Max + 1) * sizeof(waiting));
     (*Q).K = (kesabaran *) malloc ((Max + 1) * sizeof(kesabaran));
-    if (((*Q).T == NULL)||((*Q).W == NULL)||(*Q).K == NULL)
+    if ((*Q).K == NULL)
     {
         MaxElQ(*Q) = Nil;
     }
@@ -67,13 +65,11 @@ void DealokasiQueue (Queue * Q)
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 {
     MaxElQ(*Q) = Nil;
-    free((*Q).T);
-    free((*Q).W);
 	free((*Q).K);
 	free((*Q).J);
 }
 /* *** Primitif Add/Delete *** */
-void AddQueue (Queue * Q, time T, jumlah J, waiting W, kesabaran K)
+void AddQueue (Queue * Q, jumlah J, kesabaran K)
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
@@ -82,9 +78,7 @@ void AddQueue (Queue * Q, time T, jumlah J, waiting W, kesabaran K)
     {
         Head(*Q) = 1;
         Tail(*Q) = 1;
-        timeHead(*Q) = T;
         jumlahHead(*Q) = J;
-        waitingHead(*Q) = W;
         kesabaranHead(*Q) = K;
     }
     else
@@ -97,15 +91,13 @@ void AddQueue (Queue * Q, time T, jumlah J, waiting W, kesabaran K)
         {
             Tail(*Q)++;
         }
-        timeTail(*Q) = T;
         jumlahHead(*Q) = J;
-        waitingTail(*Q) = W;
         kesabaranTail(*Q) = K;
     }
 
 }
 
-void DelQueue (Queue * Q, addressQ * P, time * T, jumlah * J, waiting * W, kesabaran * K)
+void DelQueue (Queue * Q, addressQ * P, jumlah * J, kesabaran * K)
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
@@ -113,9 +105,7 @@ void DelQueue (Queue * Q, addressQ * P, time * T, jumlah * J, waiting * W, kesab
 {
     Queue Qt;
     Qt = *Q;
-	*T=timeHead(Qt);
 	*J=jumlahHead(Qt);
-	*W=waitingHead(Qt);
 	*K=kesabaranHead(Qt);
 	*P=Head(Qt);
 	
@@ -143,7 +133,7 @@ void PrintQueue(Queue Q)
 /* Isi queue dicetak ke layar */
 {	
 	addressQ p;
-    int t; int j; int w; int k; int i; 
+    iint j; int k; int i; 
     if(IsEmptyQueue(Q))
     {
 		printf("_\n");
@@ -152,14 +142,14 @@ void PrintQueue(Queue Q)
     {
 		while (!IsEmptyQueue(Q))
 		{
-			DelQueue(&Q,&p,&t,&j,&w,&k);
+			DelQueue(&Q,&p,&j,&k);
 			printf("%d\n",j);
 		}
 	}
 }
 addressQ Search(Queue Q, int jumlah)
 {	
-	int t,j,w,k;
+	int j,k;
 	boolean found;
 	addressQ P;
     if(IsEmptyQueue(Q))
@@ -171,7 +161,7 @@ addressQ Search(Queue Q, int jumlah)
     	found=false;
 		while (!IsEmptyQueue(Q) && !found)
 		{
-			DelQueue(&Q,&P,&t,&j,&w,&k);
+			DelQueue(&Q,&P,&j,&k);
 			if(j==jumlah){
 				found=true;
 			}
@@ -184,13 +174,25 @@ addressQ Search(Queue Q, int jumlah)
 Queue DeleteP(Queue Q, addressQ P)
 {
 	Queue Qt;
-	int t,j,w,k;
+	int j,k;
 	addressQ p;
 	while (!IsEmptyQueue(Q))
 	{
-		DelQueue(&Q,&p,&t,&j,&w,&k);
+		DelQueue(&Q,&p,&j,&k);
 		if(p!=P){
-			AddQueue(&Qt,t,j,w,k);
+			AddQueue(&Qt,j,k);
 		}
 	}	
+}
+
+void CopyQueue (Queue Qin, Queue *Qout)
+{
+	int J, K;
+	addressQ P;
+	CreateEmptyQueue(Qout, MaxElQ(Qin));
+	while (!IsEmptyQueue(Qin))
+	{
+		DelQueue(&Qin, &P, &J, &K);
+		AddQueue(Qout, J, K);
+	}
 }

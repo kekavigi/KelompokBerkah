@@ -6,7 +6,7 @@
 #include "duduk.h"
 #include "player.h"
 
-void SetEmpty (NoMeja *N)
+void SetEmptyDuduk (NoMeja *N)
 /*	I.S. Sembarang
 	F.S. Semua kursi di ruangan tertentu dibikin kosong */
 {
@@ -15,8 +15,8 @@ void SetEmpty (NoMeja *N)
 	{
 		Isi(*N,i) = 0;
 		Avail(*N,i) = true;
-		Sabar(*N,i) = Nil;
-		Pesan(*N,i) = Nil;
+		Sabar(*N,i) = UndDuduk;
+		Pesan(*N,i) = UndDuduk;
 	}
 }		
 	
@@ -39,8 +39,8 @@ void DelDuduk (NoMeja *N, int X)
 {
 	Isi(*N,i) = 0;
 	Avail(*N,i) = true;
-	Sabar(*N,i) = Nil;
-	Pesan(*N,i) = Nil;
+	Sabar(*N,i) = UndDuduk;
+	Pesan(*N,i) = UndDuduk;
 }
 
 int JmlSabarHabis (NoMeja N)
@@ -90,9 +90,9 @@ void DelSabarDuduk (NoMeja *N, PLAYER *P)
 			{
 				Isi(*N,i) = 0;
 				Avail(*N,i) = true;
-				Sabar(*N,i) = Nil;
-				Pesan(*N,i) = Nil;
-				Health(*P) = Health(*P) - 1;
+				Sabar(*N,i) = UndDuduk;
+				Pesan(*N,i) = UndDuduk;
+				UPDATE_LIFE (P);
 			}
 		}
 		i = i + 1;
