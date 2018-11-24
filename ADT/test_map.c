@@ -23,7 +23,6 @@ int main(){
 	POINT pbenda, pmeja;
 
 	while (running){
-			system("cls");
 			printf(">> ");
 			scanf("%d", &XX);
 			if 				(XX<1)  running = false;
@@ -34,15 +33,18 @@ int main(){
 			else if 	(XX==10){printf("iyess\n");
 												IsKursiMejaAda(Human, Rum(RuangAktif), &benda, &pbenda);
 												printf("%d\n", benda);
-												if (benda==2){
+												if ((benda==1)||(benda==2)){
 													printf("ikehh!!\n");
-													CariMeja(Posisi(Human), 2, Rum(RuangAktif), &pmeja, &nomor_meja, &kmeja);
-													IsiKursiKosong(&Mat(RuangAktif), pmeja, 2);};
+													CariMeja(pbenda, benda, Rum(RuangAktif), &pmeja, &nomor_meja, &kmeja);
+													TulisPOINT(pmeja);printf("\n");
+													//printf("%d\n", CountObjek(Mat(RuangAktif), pmeja, 'C'));
+													//printf("%d\n", CountObjek(Mat(RuangAktif), pmeja, 'X'));
+													IsiKursiKosong(&Mat(RuangAktif), pmeja, 2);
 												UpdatePETA(&RuangAktif, XX);
 												TulisPETA(RuangAktif);}
+											}
 		  else printf("cot");
-			scanf("%d",&XX);
-			system("cls");
+			printf("\n");
 	};
 
 	return 0;

@@ -3,8 +3,37 @@
 #include "move.h"
 #include <string.h>
 #include <stdio.h>
+#include "point.h"
 
-#include <stdio.h>
+/* *** KELOMPOK OPERASI LAIN TERHADAP TYPE *** */
+POINT FUP (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P), Ordinat(P)+1);
+	if(IsVal(P1)) return P1;
+	else	return P;
+}
+
+POINT FLEFT (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P)-1, Ordinat(P));
+	if(IsVal(P1)) return P1;
+	else	return P;
+}
+
+POINT FDOWN (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P), Ordinat(P)-1);
+	if(IsVal(P1)) return P1;
+	else	return P;
+}
+
+POINT FRIGHT (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P)+1, Ordinat(P));
+	if (IsVal(P1)) return P1;
+	else return P;
+}
+
 
 void MakePETA(PETA *peta, char *namafile, int room, POINT pos){
 	MakeMATRIKS(&Mat(*peta), 8, 8);
@@ -28,31 +57,29 @@ POINT FindMeja(MATRIKS M, POINT P){
 int CountObjek(MATRIKS M, POINT P, char objek){
 // akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right player;
 	int banyak = 0;
-	if ((!IsVal(UP(P)))    && (ElmtMat(M,UP(P))==objek))	 banyak++;
-	if ((!IsVal(LEFT(P)))  && (ElmtMat(M,LEFT(P))==objek))  banyak++;
-	if ((!IsVal(DOWN(P)))  && (ElmtMat(M,DOWN(P))==objek))  banyak++;
-	if ((!IsVal(RIGHT(P))) && (ElmtMat(M,RIGHT(P))==objek)) banyak++;
+	if (ElmtMat(M,FUP(P))  ==objek)	 banyak++;
+	if (ElmtMat(M,FLEFT(P))==objek)  banyak++;
+	if (ElmtMat(M,FDOWN(P))==objek)  banyak++;
+	if (ElmtMat(M,FRIGHT(P))==objek) banyak++;
 	return banyak;
 }
 
-void IsiKursiKosong(MATRIKS *M, POINT P, int minta){
+void IsiKursiKosong(MATRIKS *M, POINT meja, int minta){
 // akan mengubah state kursi kosong ke kursi penuh sebanyak minta
 //
-	POINT meja = FindMeja(*M, P);
-
-	int banyakkosong = (CountObjek(*M, meja, 'C'));
+	int banyakkosong = CountObjek(*M, meja, KKOSONG);
 	if ((CountObjek(*M, meja, 'X')==0) && banyakkosong>=minta){
-		if ((minta>0) && (ElmtMat(*M,UP(meja))==KKOSONG)){
-			ElmtMat(*M,UP(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M, FRIGHT(meja))==KKOSONG)){
+			ElmtMat(*M, FRIGHT(meja))=KPENUH;
 			minta--;}
-		if ((minta>0) && (ElmtMat(*M,RIGHT(meja))==KKOSONG)){
-			ElmtMat(*M,RIGHT(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M,FUP(meja))==KKOSONG)){
+			ElmtMat(*M,FUP(meja))=KPENUH;
 			minta--;}
-		if ((minta>0) && (ElmtMat(*M,DOWN(meja)) ==KKOSONG)){
-			ElmtMat(*M,DOWN(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M,FLEFT(meja))==KKOSONG)){
+			ElmtMat(*M,FLEFT(meja))=KPENUH;
 			minta--;}
-		if ((minta>0) && (ElmtMat(*M,LEFT(meja)) ==KKOSONG)){
-			ElmtMat(*M,LEFT(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M, FUP(meja))==KKOSONG)){
+			ElmtMat(*M, FUP(meja))=KPENUH;
 			minta--;}
 	};
 }

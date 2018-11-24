@@ -38,7 +38,7 @@ POINT FindMeja(MATRIKS M, POINT P);
 int CountObjek(MATRIKS M, POINT P, char objek);
 // akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right player;
 
-void IsiKursiKosong(MATRIKS *M, POINT P, int minta);
+void IsiKursiKosong(MATRIKS *M, POINT meja, int minta);
 // akan mengubah state kursi kosong ke kursi penuh sebanyak minta
 /* I.S : player P ada disamping customer
    F.S : jika kapasitas kursi memungkinkan, state kursi kosong akan diubah
