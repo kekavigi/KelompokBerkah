@@ -74,7 +74,7 @@ void AddQueue (Queue * Q, jumlah J, kesabaran K)
         {
             Tail(*Q)++;
         }
-        jumlahHead(*Q) = J;
+        jumlahTail(*Q) = J;
         kesabaranTail(*Q) = K;
     }
 
@@ -100,69 +100,69 @@ void DelQueue (Queue * Q, addressQ * P, jumlah * J, kesabaran * K)
 void PrintQueue(Queue Q)
 /* I.S. Q sembarang */
 /* Isi queue dicetak ke layar */
-{	
+{   
 
-	addressQ p;
+    addressQ p;
     int j; int k; int i; 
     if(IsEmptyQueue(Q))
     {
-		printf("_\n");
-	}
+        printf("(KOSONG)\n");
+    }
     else
     {
-		for(i=Head(Q);i<=Tail(Q);i++){
+        for(i=Head(Q);i<=Tail(Q);i++){
             printf("%d\n",Q.J[i]);
         }
-	}
+    }
 }
 addressQ SearchQ(Queue Q, int jumlah)
-{	
-	int j,k;
-	boolean found;
-	addressQ P;
+{   
+    int j,k;
+    boolean found;
+    addressQ P;
     if(IsEmptyQueue(Q))
     {
-		return Nil;
-	}
+        return Nil;
+    }
     else
-    {	
-    	found=false;
-		while (!IsEmptyQueue(Q) && !found)
-		{
-			DelQueue(&Q,&P,&j,&k);
-			if(j==jumlah){
-				found=true;
-			}
-		}
-		return P;
-	}	
+    {   
+        found=false;
+        while (!IsEmptyQueue(Q) && !found)
+        {
+            DelQueue(&Q,&P,&j,&k);
+            if(j==jumlah){
+                found=true;
+            }
+        }
+        return P;
+    }   
 }
 
 
 Queue DeleteP(Queue Q, addressQ P)
 {
-	Queue Qt;
-	int j,k;
-	addressQ p;
-	while (!IsEmptyQueue(Q))
-	{
-		DelQueue(&Q,&p,&j,&k);
-		if(p!=P){
-			AddQueue(&Qt,j,k);
-		}
-	}	
+    Queue Qt;
+    int j,k;
+    addressQ p;
+    while (!IsEmptyQueue(Q))
+    {
+        DelQueue(&Q,&p,&j,&k);
+        if(p!=P){
+            AddQueue(&Qt,j,k);
+        }
+    }   
 }
 
 void CopyQueue (Queue Qin, Queue *Qout)
 {
-	int J, K;
-	addressQ P;
-	CreateEmptyQueue(Qout, MaxElQ(Qin));
-	while (!IsEmptyQueue(Qin))
-	{
-		DelQueue(&Qin, &P, &J, &K);
-		AddQueue(Qout, J, K);
-	}
+    int J, K;
+    addressQ P;
+    CreateEmptyQueue(Qout, MaxElQ(Qin));
+    while (!IsEmptyQueue(Qin))
+    {
+        DelQueue(&Qin, &P, &J, &K);
+        AddQueue(Qout, J, K);
+    }
 }
 void DealokasiQueue(Queue *Q){
     MaxElQ(*Q) = Nil;
@@ -182,9 +182,8 @@ int main(){
         AddQueue(&test,j,k);
         printf("queue saat ini :\n");
         PrintQueue(test);
-        printf("head queue jumlah = ");
-        printf("%d\n",Head(test));
-
+        //printf("head queue jumlah = ");
+        //printf("%d\n",Head(test));
     }while(j!=0);
     return 0;
 }

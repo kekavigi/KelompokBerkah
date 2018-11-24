@@ -8,6 +8,35 @@ PETA Ruang3;
 PETA Dapur;
 PETA RuangAktif;
 
+/* *** KELOMPOK OPERASI LAIN TERHADAP TYPE *** */
+POINT FUP (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P), Ordinat(P)+1);
+	if(IsVal(P1)) return P1;
+	else	return P;
+}
+
+POINT FLEFT (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P)-1, Ordinat(P));
+	if(IsVal(P1)) return P1;
+	else	return P;
+}
+
+POINT FDOWN (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P), Ordinat(P)-1);
+	if(IsVal(P1)) return P1;
+	else	return P;
+}
+
+POINT FRIGHT (POINT P){
+/* Mengirim salinan P dengan ordinat ditambah satu */
+	POINT P1 = MakePOINT(Absis(P)+1, Ordinat(P));
+	if (IsVal(P1)) return P1;
+	else return P;
+}
+
 
 void MakePETA(PETA *peta, char *namafile, int room, POINT pos){
 	MakeMATRIKS(&Mat(*peta), 8, 8);
@@ -31,31 +60,29 @@ POINT FindMeja(MATRIKS M, POINT P){
 int CountObjek(MATRIKS M, POINT P, char objek){
 // akan mengembalikan banyaknya objek objek di sisi (jika ada) up, left, down, dan right player;
 	int banyak = 0;
-	if ((!IsVal(UP(P)))    && (ElmtMat(M,UP(P))==objek))	 banyak++;
-	if ((!IsVal(LEFT(P)))  && (ElmtMat(M,LEFT(P))==objek))  banyak++;
-	if ((!IsVal(DOWN(P)))  && (ElmtMat(M,DOWN(P))==objek))  banyak++;
-	if ((!IsVal(RIGHT(P))) && (ElmtMat(M,RIGHT(P))==objek)) banyak++;
+	if (ElmtMat(M,FUP(P))  ==objek)	 banyak++;
+	if (ElmtMat(M,FLEFT(P))==objek)  banyak++;
+	if (ElmtMat(M,FDOWN(P))==objek)  banyak++;
+	if (ElmtMat(M,FRIGHT(P))==objek) banyak++;
 	return banyak;
 }
 
-void IsiKursiKosong(MATRIKS *M, POINT P, int minta){
+void IsiKursiKosong(MATRIKS *M, POINT meja, int minta){
 // akan mengubah state kursi kosong ke kursi penuh sebanyak minta
 //
-	POINT meja = FindMeja(*M, P);
-
-	int banyakkosong = (CountObjek(*M, meja, 'C'));
+	int banyakkosong = CountObjek(*M, meja, KKOSONG);
 	if ((CountObjek(*M, meja, 'X')==0) && banyakkosong>=minta){
-		if ((minta>0) && (ElmtMat(*M,UP(meja))==KKOSONG)){
-			ElmtMat(*M,UP(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M, FRIGHT(meja))==KKOSONG)){
+			ElmtMat(*M, FRIGHT(meja))=KPENUH;
 			minta--;}
-		if ((minta>0) && (ElmtMat(*M,RIGHT(meja))==KKOSONG)){
-			ElmtMat(*M,RIGHT(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M,FUP(meja))==KKOSONG)){
+			ElmtMat(*M,FUP(meja))=KPENUH;
 			minta--;}
-		if ((minta>0) && (ElmtMat(*M,DOWN(meja)) ==KKOSONG)){
-			ElmtMat(*M,DOWN(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M,FLEFT(meja))==KKOSONG)){
+			ElmtMat(*M,FLEFT(meja))=KPENUH;
 			minta--;}
-		if ((minta>0) && (ElmtMat(*M,LEFT(meja)) ==KKOSONG)){
-			ElmtMat(*M,LEFT(meja))=KPENUH;
+		if ((minta>0) && (ElmtMat(*M, FUP(meja))==KKOSONG)){
+			ElmtMat(*M, FUP(meja))=KPENUH;
 			minta--;}
 	};
 }
@@ -64,10 +91,10 @@ void JadikanKursiKosong(MATRIKS *M, POINT meja){
 // akan menjadikan semua state kursi penuh menjadi kursi kosong
 // I.S : sisi left, down, right, dan up meja terdefinisi
 // F.S : jelas
-	if (ElmtMat(*M,UP(meja))==KPENUH) ElmtMat(*M,UP(meja))=KKOSONG;
-	if (ElmtMat(*M,LEFT(meja))==KPENUH) ElmtMat(*M,LEFT(meja))=KKOSONG;
-	if (ElmtMat(*M,DOWN(meja))==KPENUH) ElmtMat(*M,DOWN(meja))=KKOSONG;
-	if (ElmtMat(*M,RIGHT(meja))==KPENUH) ElmtMat(*M,RIGHT(meja))=KKOSONG;
+	if (ElmtMat(*M,FUP(meja))==KPENUH)    ElmtMat(*M,FUP(meja))=KKOSONG;
+	if (ElmtMat(*M,FLEFT(meja))==KPENUH)  ElmtMat(*M,FLEFT(meja))=KKOSONG;
+	if (ElmtMat(*M,FDOWN(meja))==KPENUH)  ElmtMat(*M,FDOWN(meja))=KKOSONG;
+	if (ElmtMat(*M,FRIGHT(meja))==KPENUH) ElmtMat(*M,FRIGHT(meja))=KKOSONG;
 }
 
 void UpdatePETA(PETA *peta, int X){
@@ -81,20 +108,42 @@ void UpdatePETA(PETA *peta, int X){
 	if (room!=Rum(*peta)){
 			//player pindah ruangan, simpan apapun yang terjadi di RuangAktif ke Ruang yang bersesuaian
 			//jika awalnya rum1, update rum1...
-			if 			(Rum(*peta)==1) Dapur = *peta;
+			if 		(Rum(*peta)==1) Dapur = *peta;
 			else if (Rum(*peta)==2) Ruang1 = *peta;
 			else if (Rum(*peta)==3) Ruang2 = *peta;
-			else									  Ruang3  = *peta;
+			else				    Ruang3  = *peta;
 			//sekarang update peta, jika room=1, fetch data dapur
-			if 			(room==1) *peta = Dapur;
+			if 		(room==1) *peta = Dapur;
 			else if (room==2) *peta = Ruang1;
 			else if (room==3) *peta = Ruang2;
-			else							*peta = Ruang3;
+			else			  *peta = Ruang3;
 			Rum(*peta) = room;
 	};
 	//kalau sudah update room peta, atau ngga ubah room peta, tinggal
 	Pos(*peta) = Posisi(P);
 };
+
+void UpdatePelangganPETA(PETA *peta, NoMeja meja){
+	// mengubah menjadi peta yang baru akibat kesabaran pelanggan
+	//well, setiap room non-dapur punya empat meja, anggap
+	POINT noA = MakePOINT(2,7);
+	POINT noB = MakePOINT(7,7);
+	POINT noC = MakePOINT(2,2);
+	POINT noD = MakePOINT(7,2);
+	// dan  so.. ini kode ugly bats dah
+	if (!Avail(meja,1)  && !Sabar(meja,1))  JadikanKursiKosong(&Mat(Ruang1), noA);
+	if (!Avail(meja,2)  && !Sabar(meja,2))  JadikanKursiKosong(&Mat(Ruang1), noB);
+	if (!Avail(meja,3)  && !Sabar(meja,3))  JadikanKursiKosong(&Mat(Ruang1), noC);
+	if (!Avail(meja,4)  && !Sabar(meja,4))  JadikanKursiKosong(&Mat(Ruang1), noD);
+	if (!Avail(meja,5)  && !Sabar(meja,5))  JadikanKursiKosong(&Mat(Ruang2), noA);
+	if (!Avail(meja,6)  && !Sabar(meja,6))  JadikanKursiKosong(&Mat(Ruang2), noB);
+	if (!Avail(meja,7)  && !Sabar(meja,7))  JadikanKursiKosong(&Mat(Ruang2), noC);
+	if (!Avail(meja,8)  && !Sabar(meja,8))  JadikanKursiKosong(&Mat(Ruang2), noD);
+	if (!Avail(meja,9)  && !Sabar(meja,9))  JadikanKursiKosong(&Mat(Ruang3), noA);
+	if (!Avail(meja,10) && !Sabar(meja,10)) JadikanKursiKosong(&Mat(Ruang3), noB);
+	if (!Avail(meja,11) && !Sabar(meja,11)) JadikanKursiKosong(&Mat(Ruang3), noC);
+	if (!Avail(meja,12) && !Sabar(meja,12)) JadikanKursiKosong(&Mat(Ruang3), noD);
+}
 
 void TulisPETA(PETA peta){
 // mencetak peta ke layar

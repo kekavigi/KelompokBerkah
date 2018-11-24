@@ -61,6 +61,6 @@ void PrintStackt(Stack S)
     puts("\n");
   }
   else{
-    puts("\n(KOSONG)\n");
+    puts("(KOSONG)\n");
   }
 }

@@ -147,7 +147,8 @@ void IsKursiMejaAda(PLAYER P, int CURRENT_ROOM, int *BENDA, POINT *PBENDA){
 }
 
 
-void CariMeja(POINT P, int BENDA, int CURRENT_ROOM, POINT *PMEJA, int *NOMOR_MEJA, int *KMEJA){ // HANYA DIPAKAI KETIKA INT BENDA == 1 atau 2
+void CariMeja(POINT P, int BENDA, int CURRENT_ROOM, POINT *PMEJA, int *NOMOR_MEJA, int *KMEJA){
+// HANYA DIPAKAI KETIKA INT BENDA == 1 atau 2
 // PROSEDUR UNTUK MENCARI POSISI MEJA, P adalah posisi kursi atau meja
 
 	POINT seek;

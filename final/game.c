@@ -37,7 +37,6 @@
 	TabInt DPesanan; // Digunakan Sebagai Daftar Pesanan
 	int ambil; // Digunakan untuk mengambil bahan secara manual
 	Kata GU, GD, GL, GR, OR, PT, TK, CH1, CT1, PL, GV, RC, EX; //Digunakan sebagai penyimpan command
-	PETA Hahah;
 	NoMeja N; //Buat ngurus orang duduk
 	Queue Q; //Buat ngurus orang antri
 	int benda,NOMOR_MEJA,KMEJA; // keterangan benda
@@ -53,6 +52,11 @@
 		addressQ P1;
 		#define MaxAntri 50
 	Pesanan DaftarPesanan; //Buat ngurus daftar pesanan
+	extern PETA Ruang1;
+	extern PETA Ruang2;
+	extern PETA Ruang3;
+	extern PETA Dapur;
+	extern PETA RuangAktif;
 
 /*Fungsi Yang Akan Digunakan*/
 	void SiapkanKata();
@@ -68,11 +72,14 @@ int main (){
 	
 /* ANTARMUKA GAME    */ // TAMPILAN PERTAMA YANG DITUNJUKKAN SAAT GAME DIMULA
 	do{
+		system("cls");
 		printf("\n\n\n-- ENGI'S KITCHEN EXPANSION GAME (18++) --\n\n\n");
 		printf("NEW GAME\nSTART GAME\nEXIT\n\n");
-		printf("Pilih Menu [1 = NEW GAME, 2 = START GAME, 3 = EXIT] :");
+		printf("Pilih Menu [1 = NEW GAME, 2 = START GAME, 3 = EXIT] : ");
 
 		scanf("%d", &COMMAND);
+
+		printf ("\n");
 
 		if(COMMAND == 1){
 			system("cls");
@@ -119,9 +126,12 @@ int main (){
 		GENERATE_PELANGGAN (GAME_CLOCK, &Q); // KALO JAMNYA MERUPAKAN KELIPATAN 15, AKAN MENAMBAH 1 PELANGGAN
 
 		TulisPETA(RuangAktif);
+		printf ("\n");
 		printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",CURRENT_ROOM,Absis(Posisi(P)),Ordinat(Posisi(P)));
+		printf ("\n");
 		printf("Nyawa Tersisa : %d\n", Health(P));
 		printf("Uang : %d\n", Money(P));
+		printf ("\n");
 		
 		/*  INI GAMEPLAY */
 		do{
@@ -174,7 +184,7 @@ int main (){
 				IsKursiMejaAda(P,CURRENT_ROOM,&benda,&seek);
  				if (benda == 1 || benda == 2){
  					CariMeja(seek, benda, CURRENT_ROOM, &PMEJA, &nm, &KMEJA);
- 					printf("Di sekitar player ada meja yang bernomor %d, dan kapasitasnya adalah %d.\n",nm,KMEJA);
+ 					printf("Di sekitar player ada meja yang bernomor %d, dan kapasitasnya adalah %d.\n",nm, KMEJA);
  				}else{
  					printf("Tidak ada apa-apa di sekitar player.\n");
  				}
@@ -262,6 +272,7 @@ int main (){
  				if (benda == 1 || benda == 2){
  					CariMeja(seek, benda, CURRENT_ROOM, &PMEJA, &nm, &KMEJA);
  					printf("Di sekitar player ada meja yang bernomor %d, dan kapasitasnya adalah %d.\n",nm,KMEJA);
+ 					printf ("\n");
  				}else{
  					printf("Tidak ada apa-apa di sekitar player.\n");
  				}
@@ -276,10 +287,13 @@ int main (){
 					if ((jumlahHead(Q) <= Cap(N,nm)) && (Avail(N,nm)))
 					{
 						PlaceCustAntri (&N, nm, &Q, &P1, &J, &K);
+						IsiKursiKosong(&Mat(RuangAktif), PMEJA, jumlahHead(Q));
+						UpdatePETA(&RuangAktif, COMMAND);
 					}
 					else
 					{
 						printf ("Kursi tidak bisa ditempati.\n");
+						printf ("\n");
 					}
 				}
 				JADV(&GAME_CLOCK); // JAM BERTAMBAH
@@ -331,6 +345,7 @@ int main (){
 			}
 
 			/*  LAKUKAN UPDATE STATUS DI SINI */
+			UpdatePelangganPETA(&RuangAktif, N);
 			TulisPETA(RuangAktif);
 			printf ("\n");
 			printf("Kamu ada di ruang %d, Posisi kamu di [%d,%d]\n",CURRENT_ROOM,Absis(Posisi(P)),Ordinat(Posisi(P)));
@@ -356,7 +371,13 @@ int main (){
 			//DelSabarDuduk (&DaftarPesanan, &N, &P); //HAPUS PELANGGAN YANG DUDUK, KESABARAN HABIS
 		}while(COMMAND != 13 && HEALTH_CUKUP(P));
 
-
+		if (Health(P) == 0)
+		{
+			system("cls");
+			printf ("\n\n\n---GAME OVER---\n\n\n");
+			printf ("%s telah bermain selama %d, dengan skor akhir %d.\n", NAMA_PEMAIN, GAME_CLOCK, Money(P));
+		}
+		printf("THIS GAME IS CREATED BY DANDI, FIO, KEKA, WANUL. TERIMA KASIH TELAH BERMAIN.\n");
 	}
 
 	return 0;
