@@ -3,8 +3,6 @@
 #include "stackt.h"
 #include "dataresep.h"
 #include "stackt.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 void Allocate (paddress *P)
 {
@@ -12,12 +10,8 @@ void Allocate (paddress *P)
 }
 
 BinTree Tree (int A, BinTree L, BinTree R)
-//Menghasilkan sebuah pohon biner dari A, L, dan R, jika alokasi berhasil
-//Menghasilkan pohon kosong (NilTree) jika alokasi gagal
 {
-	//Kamus Lokal
 	paddress P;
-	//Algoritma
 	Allocate (&P);
 	if (P!=NilTree) {
 		Akar(P) = A;
@@ -27,10 +21,6 @@ BinTree Tree (int A, BinTree L, BinTree R)
 	return P;
 }
 void MakeTree (int Akar, BinTree L, BinTree R, BinTree *P)
-//I.S. Sembarang 
-//F.S. Menghasilkan sebuah pohon P 
-//Menghasilkan sebuah pohon biner P dari A, L, dan R, jika alokasi berhasil 
-//Menghasilkan pohon P yang kosong (NilTree) jika alokasi gagal 
 {
 	Allocate(P);
 	if (*P!=NilTree) {
@@ -42,32 +32,30 @@ void MakeTree (int Akar, BinTree L, BinTree R, BinTree *P)
 
 void LoadTree(BinTree *P)
 {
-	//Kamus
-	//Algoritma
 	START("resep.txt");
 	BuildTree(P);
 }
 
 void BuildTree (BinTree *P)
 {
-	//Kamus Lokal
-	char Num[256];
+
+	char tanda[256];
 	int i;
-	//Algoritma
+
 	ADV();
 	if (CC==')')
 		(*P)=NilTree;
 	else {
 		Allocate(P);
 		for (i=0; i<256; i++)
-			Num[i] = 0;
+			tanda[i] = 0;
 		i = 0;
 		while ((CC !='(')&&(CC != ')')) {
-			Num[i] = CC;
+			tanda[i] = CC;
 			ADV();
 			i++;
 		}
-		Akar(*P) = atoi(Num);
+		Akar(*P) = atoi(tanda);
 		BuildTree(&Left(*P));
 		BuildTree(&Right(*P));
 	}
@@ -75,44 +63,31 @@ void BuildTree (BinTree *P)
 }
 
 boolean IsTreeEmpty (BinTree P)
-//Mengirimkan true jika P adalah pohon biner kosong
 {
 	return (P==NilTree);
 }
 
 boolean IsOneElmt (BinTree P)
-//Mengirimkan true jika P adalah pohon biner tidak kosong dan
-//hanya memiliki 1 elemen
 {
 	return ((!IsTreeEmpty(P))&&(IsTreeEmpty(Left(P)))&&(IsTreeEmpty(Right(P))));
 }
 
 boolean IsUnerLeft (BinTree P)
-//Mengirimkan true jika pohon biner tidak kosong P adalah
-//pohon unerleft: hanya mempunyai subpohon kiri
 {
 	return ((Right(P) == NilTree) && (Left(P) != NilTree));
 }
 
 boolean IsUnerRight (BinTree P)
-//Mengirimkan true jika pohon biner tidak kosong P adalah
-//pohon unerright: hanya mempunyai subpohon kanan
 {
 	return ((Right(P) != NilTree) && (Left(P) == NilTree));
 }
 
 boolean IsBiner (BinTree P)
-//Mengirimkan true jika pohon biner tidak kosong P adalah
-//pohon biner: mempunyai subpohon kiri dan subpohon kanan
 {
 	return ((Right(P) != NilTree) && (Left(P) != NilTree));
 }
 
-/*** Traversal ***/
 void PrintPreorder (BinTree P)
-//I.S. P terdefinisi
-//F.S. Semua simpul P sudah dicetak secara preorder: akar, pohon kiri, dan pohon
-//kanan. Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
 {
 	if (P!=NilTree)  {
 		printf("%d\n", Akar(P));
@@ -121,9 +96,6 @@ void PrintPreorder (BinTree P)
 	}
 }
 void PrintInorder (BinTree P)
-//I.S. P terdefinisi
-//F.S. Semua simpul P sudah dicetak secara inorder: pohon kiri, akar, dan pohon
-//kanan. Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
 {
 	if (P!=NilTree)  {
 		PrintInorder(Left(P));
@@ -132,9 +104,6 @@ void PrintInorder (BinTree P)
 	}
 }
 void PrintPostorder (BinTree P)
-//I.S. P terdefinisi
-//F.S. Semua simpul P sudah dicetak secara postorder: pohon kiri, pohon kanan, dan
-//akar. Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup ().
 {
 	puts(bahan[Akar(P)]);
 	if (P!=NilTree)  {
@@ -146,10 +115,10 @@ void PrintPostorder (BinTree P)
 
 void ShowBranch (BinTree P)
 {
-	//Kamus
-	int Slash[100]; //Index yang menyimpan posisi tempat mencetak '|'
+
+	int Slash[100]; 
 	int i;
-	//Algoritma
+
 	for( i = 0;i < 100; i++){
 		Slash[i] = 0;
 	}
@@ -168,7 +137,7 @@ void PrintTree (BinTree P, int inden1, int inden2, int * ArrSlash)
 {
 	int i,j,k;
 	int subakar = inden2 + inden1/2;
-	//Algoritma
+
 	if (!IsTreeEmpty(P)) {
 		if (Akar(P) == 1){
 			printf("***RESEP MAKANAN*** \n");
@@ -207,7 +176,6 @@ void PrintTree (BinTree P, int inden1, int inden2, int * ArrSlash)
 			} 
 			printf(">");
 			j = 0;
-			/*Delete "|" setelah melewati cabang kanan */
 			while (ArrSlash[j] != 0){
 				if (ArrSlash[j] == subakar){
 					ArrSlash[j] = -999;
@@ -220,11 +188,7 @@ void PrintTree (BinTree P, int inden1, int inden2, int * ArrSlash)
 }
 
 boolean SearchPB (BinTree P, int X)
-//Mengirimkan true jika ada node dari P yang bernilai X
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if (IsTreeEmpty(P)) {
 		return false;
 	}
@@ -238,11 +202,7 @@ boolean SearchPB (BinTree P, int X)
 
 
 int NbElmtPB (BinTree P)
-//Mengirimkan banyaknya elemen (node) pohon biner P
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if (IsTreeEmpty(P)) {
 		return 0;
 	}
@@ -252,11 +212,7 @@ int NbElmtPB (BinTree P)
 }
 
 int NbDaun (BinTree P)
-//Mengirimkan banyaknya daun (node) pohon biner P
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if ((Left(P)==NilTree)&&(Right(P)==NilTree)) {
 		return 1;
 	}
@@ -274,11 +230,7 @@ int NbDaun (BinTree P)
 }
 
 boolean IsSkewLeft (BinTree P)
-//Mengirimkan true jika P adalah pohon condong kiri 
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if (IsTreeEmpty(P))
 		return false;
 	else {
@@ -296,11 +248,7 @@ boolean IsSkewLeft (BinTree P)
 }
 
 boolean IsSkewRight (BinTree P)
-//Mengirimkan true jika P adalah pohon condong kiri
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if (IsTreeEmpty(P))
 		return false;
 	else {
@@ -318,12 +266,7 @@ boolean IsSkewRight (BinTree P)
 }
 
 int Level (BinTree P, int X)
-//Mengirimkan level dari node X yang merupakan salah satu simpul dari pohon biner
-//P. Akar(P) level-nya adalah 1. Pohon P tidak kosong. }
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if (X==Akar(P)){
 		return 1;
 	}
@@ -335,10 +278,7 @@ int Level (BinTree P, int X)
 			return 1+Level(Right(P), X);
 		}
 }
-/*** Operasi lain ***/
 void AddDaunTerkiri (BinTree *P, int X)
-//I.S. P boleh kosong 
-//F.S. P bertambah simpulnya, dengan X sebagai simpul daun terkiri
 {
 	paddress Pk;
 	if (IsTreeEmpty(*P)) {
@@ -360,13 +300,8 @@ void AddDaunTerkiri (BinTree *P, int X)
 }
 
 void AddDaun (BinTree *P, int X, int Y, boolean Kiri)
-//I.S. P tidak kosong, X adalah salah satu daun Pohon Biner P 
-//F.S. P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri = true), atau
-//sebagai anak Kanan X (jika Kiri = false) 
 {
-	//Kamus Lokal
 	paddress Pk;
-	//Algoritma
 	if (X==Akar(*P)) {
 		Allocate(&Pk);
 		Akar(Pk) = Y;
@@ -388,13 +323,7 @@ void AddDaun (BinTree *P, int X, int Y, boolean Kiri)
 }
 
 void DelDaunTerkiri (BinTree *P, int *X)
-//I.S. P tidak kosong 
-//F.S. P dihapus daun terkirinya, dan didealokasi, dengan X adalah info yang semula
-//disimpan pada daun terkiri yang dihapus 
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if (Left(*P)==NilTree) {
 		if (Right(*P)==NilTree) {
 			(*X) = Akar(*P);
@@ -411,12 +340,7 @@ void DelDaunTerkiri (BinTree *P, int *X)
 }
 
 void DelDaun (BinTree *P, int X)
-//I.S. P tidak kosong, X adalah salah satu daun 
-//F.S. Semua daun bernilai X dihapus dari P 
 {
-	//Kamus Lokal
-	
-	//Algoritma
 	if ((X==Akar(*P))&&(IsOneElmt(*P))) {
 		free(*P);
 	}
@@ -431,14 +355,11 @@ void DelDaun (BinTree *P, int X)
 }
 
 BinTree BuildBalanceTree (int n)
-//Menghasilkan sebuah balanced tree dengan n node, nilai setiap node dibaca
 {
-	//Kamus Lokal
 	paddress P;
 	int nL, nR;
 	int X;
 	BinTree R, L;
-	//Algoritma
 	if (n==0) {
 		return NilTree;
 	}
@@ -458,13 +379,10 @@ BinTree BuildBalanceTree (int n)
 }
 
 BinTree InsSearch (BinTree P, int X)
-//Menghasilkan sebuah pohon Binary Search Tree P dengan tambahan simpul X. 
-//Belum ada simpul P yang bernilai X.
 {
-	//Kamus Lokal
+
 	BinTree Pout;
-	
-	//Algoritma
+
 	if (IsTreeEmpty(P)) {
 		MakeTree(X, NilTree, NilTree, &Pout);
 	}
@@ -480,13 +398,10 @@ BinTree InsSearch (BinTree P, int X)
 }
 
 void DelBtree (BinTree *P, int X)
-//I.S. Pohon P tidak kosong 
-//F.S. Nilai X yang dihapus pasti ada 
-//Sebuah node dengan nilai X dihapus 
+
 {
-	//Kamus Lokal
 	paddress q;
-	//Algoritma
+
 	if (X<Akar(*P)) {
 		DelBtree(&Left(*P), X);
 	}
@@ -510,9 +425,7 @@ void DelBtree (BinTree *P, int X)
 
 
 void DelNode (BinTree *P) {
-	//Kamus Lokal
 	paddress q;
-	//Algoritma
 	if (Right(*P)!=NilTree) {
 		DelNode(&Right(*P));
 	}
@@ -524,10 +437,8 @@ void DelNode (BinTree *P) {
 
 void SearchBranch(BinTree *P, Stack * StackIn, Stack * StackOut)
 {
-  //Kamus
   infotypeStackt X;
   boolean match = true;
-  //Algoritma
   while ((match) && (!IsOneElmt(*P))){
     if (!IsEmptyStackt(*StackIn)){
       Pop(StackIn,&X);
@@ -537,13 +448,13 @@ void SearchBranch(BinTree *P, Stack * StackIn, Stack * StackOut)
       if (InfoTop(*StackIn) != Akar(Right(*P))){
         match = false;
       }
-      *P = Right(*P); //kasus bahan akhir uner
+      *P = Right(*P); 
     }
     else if (IsUnerLeft(*P)){
       if (InfoTop(*StackIn) != Akar(Left(*P))){
         match = false;
       }
-      *P = Left(*P); //kasus bahan akhir uner
+      *P = Left(*P); 
     }
     else{
       if (InfoTop(*StackIn) == Akar(Right(*P))){
