@@ -1,1 +1,1 @@
-gcc -o test game.c peta.c move.c jam.c point.c player.c dataresep.c bintree.c stackt.c mesinkata.c mesinkar.c komplitstack.c array.c seeker.c duduk.c pesanan.c matriks.c queue.c antri.c
+gcc -o test game.c peta.c move.c jam.c point.c player.c dataresep.c bintree.c stackt.c mesinkata.c mesinkar.c komplitstack.c array.c seeker.c duduk.c pesanan.c matriks.c queue.c antri.c interface.c

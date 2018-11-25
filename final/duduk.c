@@ -91,7 +91,12 @@ void DelSabarDuduk (Pesanan *DaftarPesanan, NoMeja *N, PLAYER *P)
 				Avail(*N,i) = true;
 				Sabar(*N,i) = UndDuduk;
 				Pesan(*N,i) = UndDuduk;
+				printf ("Kesabaran salah satu pelanggan yang antri habis! Nyawa berkurang 1.\n");
 				UPDATE_LIFE (P);
+			}
+			else if (Sabar (*N,i) == 5)
+			{
+				printf ("Kesabaran pelanggan yang duduk di meja %d tinggal 5.\n", i);
 			}
 		}
 		i = i + 1;

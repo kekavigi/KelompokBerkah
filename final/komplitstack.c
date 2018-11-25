@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Stack Hand;
-Stack Nampan;
-TabInt Pesanan;
 
 void CH(Stack *Hand){
   //Membuang semua makanan di hand

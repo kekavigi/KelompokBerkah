@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "antri.h"
-
+#include "duduk.h"
 
 void SetEmptyAntri (Queue *Q, int Max)
 //I.S. Sembarang
@@ -42,9 +42,10 @@ boolean CekSabarAntri (Queue Q)
 	}
 	else
 	{
-		while (!IsEmptyQueue(Q) && !abis)
+		while (!IsEmptyQueue(Q) && !(abis))
 		{
 			DelQueue (&Q, &P, &j, &k);
+			printf ("%d\n",k);
 			if (k == 0)
 			{
 				abis = true;
@@ -59,13 +60,14 @@ void UpdateSabarAntri (Queue *Q)
 // I.S. Asumsi gak ada yang kesabarannya 0
 {
 	Queue QTemp1, QTemp2;
+	CreateEmptyQueue (&QTemp1, MaxElQ(*Q));
 	CreateEmptyQueue (&QTemp2, MaxElQ(*Q));
 	int J, K;
 	addressQ P;
 	CopyQueue (*Q, &QTemp1);
 	while (!IsEmptyQueue(QTemp1))
 	{
-		kesabaranHead(*Q) = kesabaranHead(*Q) - 1;
+		kesabaranHead(QTemp1) = kesabaranHead(QTemp1) - 1;
 		DelQueue(&QTemp1, &P, &J, &K);
 		AddQueue(&QTemp2, J, K);
 	}
@@ -97,7 +99,36 @@ void GeneratePelanggan (Queue *Q)
 {
 	JAM K;
 	int J; // jumlah pengunjung
-	J = (rand()%4)+1;
+	J = rand() % (4 + 1 - 1) + 1;
 	J_ANTRI(&K);
 	AddQueue (Q,J,K);
+}
+
+void DelAntriSabar (Queue *Q, PLAYER *P)
+// menghapus pelanggan duduk, sabar habis
+{
+	addressQ i;
+	Queue Qtemp;
+	CreateEmptyQueue (&Qtemp, MaxElQ(*Q));
+	CopyQueue(*Q,&Qtemp);
+	if(!IsEmptyQueue(*Q)){
+		for(i=Head(*Q);i<=Tail(*Q);i++){
+			if((Qtemp.K[i])==0){
+				//Qtemp=DeleteP(*Q,i);
+				printf ("Kesabaran salah satu pelanggan yang antri habis! Nyawa berkurang 1.\n");
+				CopyQueue(DeleteP(Qtemp,i),&Qtemp);
+				UPDATE_LIFE(P);
+			}
+			else if((Qtemp.K[i])==5)
+			{
+				printf ("Kesabaran pelanggan yang antri ke %d sisa 5.\n",i);
+			}
+			/*else
+			{
+				CopyQueue(*Q,&Qtemp);
+			}*/
+		}
+	}
+	CopyQueue(Qtemp,Q);
+	DealokasiQueue (&Qtemp);
 }

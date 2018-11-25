@@ -23,9 +23,9 @@ void J_ANTRI (JAM *J){
 }
 
 void J_DUDUK (JAM *J){
-// Mengatur jam kesabaran saat pelanggan sudah duduk (50 - 70)
+// Mengatur jam kesabaran saat pelanggan sudah duduk (60 - 75)
 
-	*J = (rand()%21)+50;
+	*J = (rand()%16)+60;
 }
 
 boolean JAM_HABIS (JAM J){

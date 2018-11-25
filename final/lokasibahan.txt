@@ -1,0 +1,21 @@
+M _ _ _ _ _ _ T
+M _ _ _ _ _ _ _
+M _ _ _ _ _ _ _
+M _ _ _ _ _ _ _
+M _ _ M M M _ _
+M _ _ _ _ _ _ _
+M _ _ _ _ _ _ _
+M _ _ M M M M M
+
+PISANG
+SPAGHETTI
+ROTI
+NASI
+ES KRIM _ _ BOLOGNESE CARBONARA KEJU
+GARPU
+SENDOK
+PIRING _ _ STROBERI TELUR AYAM PATTY SOSIS
+
+Spag. Carb -> Piring, garpu, spag, carb
+Hot dog -> Piring, garpu, roti, sosis
+
