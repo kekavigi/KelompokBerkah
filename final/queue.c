@@ -142,6 +142,7 @@ addressQ SearchQ(Queue Q, int jumlah)
 Queue DeleteP(Queue Q, addressQ P)
 {
     Queue Qt;
+	CreateEmptyQueue (&Qt, MaxElQ(Q));
     int j,k;
     addressQ p;
     while (!IsEmptyQueue(Q))
@@ -150,7 +151,8 @@ Queue DeleteP(Queue Q, addressQ P)
         if(p!=P){
             AddQueue(&Qt,j,k);
         }
-    }   
+    }  
+	return (Qt);	
 }
 
 void CopyQueue (Queue Qin, Queue *Qout)
